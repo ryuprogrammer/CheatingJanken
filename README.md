@@ -1,0 +1,2 @@
+# CheatingJanken_ryu
+CoreMLを用いた後出しジャンケンゲームアプリ
