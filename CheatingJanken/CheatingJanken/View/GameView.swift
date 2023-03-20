@@ -30,15 +30,26 @@ struct GameView: View {
                     .frame(maxWidth: .infinity, maxHeight: 80)
                     .background(Color("theme").opacity(0.8))
                 
-                Image(systemName: "hand.wave.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.white)
-                    .padding(30)
-                    .background(Color.green.opacity(0.6))
-                    .cornerRadius(70)
-                    .frame(width: 190)
+                ZStack {
+                    Image(systemName: "hand.wave.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.white)
+                        .padding(30)
+                        .background(Color.green.opacity(0.6))
+                        .cornerRadius(70)
+                        .frame(width: 190)
                     .offset(x: -90)
+                    
+                    Text("ロボット")
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color.green)
+                        .frame(width: 130, height: 40)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .offset(x: -90, y: -90)
+                }
 
                 Spacer()
                 
@@ -57,7 +68,7 @@ struct GameView: View {
                     Image(systemName: "hand.wave.fill")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.white.opacity(0.7))
+                        .foregroundColor(.white.opacity(0.6))
                         .padding(30)
                         .cornerRadius(70)
                         .frame(width: 220, height: 300)
