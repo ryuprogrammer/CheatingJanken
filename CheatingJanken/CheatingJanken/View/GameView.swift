@@ -41,23 +41,35 @@ struct GameView: View {
                     .offset(x: -90)
 
                 Spacer()
+                
                 ZStack {
+                    Image("camera")
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(70)
+                        .frame(width: 220, height: 300)
+                    
+                    Rectangle()
+                        .foregroundColor(Color.green.opacity(0.3))
+                        .cornerRadius(70)
+                        .frame(width: 220, height: 300)
+                    
                     Image(systemName: "hand.wave.fill")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.white)
+                        .foregroundColor(.white.opacity(0.7))
                         .padding(30)
-                        .background(Color.green.opacity(0.6))
                         .cornerRadius(70)
-                        .frame(width: 220)
-                    Text("あなた")
+                        .frame(width: 220, height: 300)
+                    
+                    Text("あなた：チョキ")
                         .font(.title)
                         .bold()
                         .foregroundColor(Color.green)
-                        .frame(width: 100, height: 40)
+                        .frame(width: 220, height: 40)
                         .background(Color.white)
                         .cornerRadius(10)
-                        .offset(y: -110)
+                        .offset(y: -130)
                 }
                 
                 Button {
