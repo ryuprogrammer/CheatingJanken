@@ -9,26 +9,25 @@ import SwiftUI
 
 struct GameView: View {
     @Environment(\.dismiss) var dismiss
+    @State var isStart: Bool = false
     var body: some View {
         ZStack {
             VStack {
                 Color("sky")
-                Color("ground")
+                Color("green")
             }
             .ignoresSafeArea()
             
-            Image("robot")
+            Image("gameView")
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea()
+                .offset(y: -30)
             
-            VStack(spacing: 50) {
-                Text("あいこ")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(Color("button"))
-                    .frame(maxWidth: .infinity, maxHeight: 80)
-                    .background(Color("theme").opacity(0.8))
+            VStack(spacing: 20) {
+                
+                Spacer()
+                    .frame(height: 100)
                 
                 ZStack {
                     Image(systemName: "hand.wave.fill")
@@ -36,58 +35,81 @@ struct GameView: View {
                         .scaledToFit()
                         .foregroundColor(.white)
                         .padding(30)
-                        .background(Color.green.opacity(0.6))
+                        .background(Color.cyan.opacity(0.6))
                         .cornerRadius(70)
                         .frame(width: 190)
-                    .offset(x: -90)
+                        .offset(x: -90)
                     
                     Text("ロボット")
                         .font(.title)
                         .bold()
-                        .foregroundColor(Color.green)
+                        .foregroundColor(Color.cyan)
                         .frame(width: 130, height: 40)
                         .background(Color.white)
                         .cornerRadius(10)
                         .offset(x: -90, y: -90)
                 }
-
+                
+                Text("スタートボタンを押してね！")
+                    .font(.title)
+                    .foregroundColor(Color.cyan)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 100)
+                    .background(Color.white.opacity(0.7))
+                    .onTapGesture {
+                        dismiss()
+                    }
+                
                 Spacer()
                 
-                ZStack {
-                    Image("camera")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(70)
-                        .frame(width: 220, height: 300)
-                    
-                    Rectangle()
-                        .foregroundColor(Color.green.opacity(0.3))
-                        .cornerRadius(70)
-                        .frame(width: 220, height: 300)
-                    
-                    Image(systemName: "hand.wave.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.white.opacity(0.6))
-                        .padding(30)
-                        .cornerRadius(70)
-                        .frame(width: 220, height: 300)
-                    
-                    Text("あなた：チョキ")
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(Color.green)
-                        .frame(width: 220, height: 40)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .offset(y: -130)
+                if isStart {
+                    ZStack {
+                        Image("camera")
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(70)
+                            .frame(width: 220, height: 300)
+                        
+                        Rectangle()
+                            .foregroundColor(Color.cyan)
+                            .opacity(0.5)
+                            .cornerRadius(70)
+                            .frame(width: 220, height: 300)
+                        
+                        Image(systemName: "hand.wave.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.white.opacity(0.6))
+                            .padding(30)
+                            .cornerRadius(70)
+                            .frame(width: 220, height: 300)
+                        
+                        Text("あなた   パー")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color.cyan)
+                            .frame(width: 220, height: 40)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .offset(y: -130)
+                    }
+                } else {
+                    Button {
+                        isStart = true
+                    } label: {
+                        Text("スタート")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(Color.cyan)
+                            .frame(width: 220, height: 300)
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(20)
+                    }
                 }
                 
-                Button {
-                    dismiss()
-                } label: {
-                    Text("戻る")
-                }
+                Spacer()
             }
         }
     }

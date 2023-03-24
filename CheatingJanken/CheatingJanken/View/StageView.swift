@@ -25,9 +25,9 @@ struct StageView: View {
             Text("ステージを選択")
                 .font(.largeTitle)
                 .bold()
-                .foregroundColor(Color("button"))
+                .foregroundColor(Color.white)
                 .frame(maxWidth: .infinity, maxHeight: 80)
-                .background(Color("theme"))
+                .background(Color("ground"))
             
             ScrollView {
                 VStack {
@@ -49,7 +49,7 @@ struct StageView: View {
                             }
                             .padding()
                             .frame(width: 300, height: 80)
-                            .background(Color("theme"))
+                            .background(Color("ground"))
                         }
                     }
                     .cornerRadius(20)
