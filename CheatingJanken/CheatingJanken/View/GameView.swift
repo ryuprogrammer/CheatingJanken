@@ -10,6 +10,8 @@ import SwiftUI
 struct GameView: View {
     @Environment(\.dismiss) var dismiss
     @State var isStart: Bool = false
+    // HandPoseClassifiler2モデルのインスタンス生成
+    let model = HandPoseClassifier2.self
     var body: some View {
         ZStack {
             VStack {
