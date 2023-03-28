@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct GameView: View {
     @Environment(\.dismiss) var dismiss
     @State var isStart: Bool = false
     // HandPoseClassifiler2モデルのインスタンス生成
-    let model = HandPoseClassifier2.self
+    @StateObject var handPoseClassifier = HandPoseClassifier()
     var body: some View {
         ZStack {
             VStack {
@@ -68,11 +69,15 @@ struct GameView: View {
                 
                 if isStart {
                     ZStack {
-                        Image("camera")
-                            .resizable()
-                            .scaledToFit()
+                        CameraPreview(session: handPoseClassifier.cameraFeedSession)
+                            .frame(width: UIScreen.main.bounds.width/2,
+                                   height: UIScreen.main.bounds.height/2)
                             .cornerRadius(70)
-                            .frame(width: 220, height: 300)
+//                        Image("camera")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .cornerRadius(70)
+//                            .frame(width: 220, height: 300)
                         
                         Rectangle()
                             .foregroundColor(Color.cyan)
@@ -88,7 +93,7 @@ struct GameView: View {
                             .cornerRadius(70)
                             .frame(width: 220, height: 300)
                         
-                        Text("あなた   パー")
+                        Text(handPoseClassifier.predictionResult ?? "Unknown")
                             .font(.title)
                             .bold()
                             .foregroundColor(Color.cyan)
@@ -115,6 +120,27 @@ struct GameView: View {
             }
         }
     }
+}
+
+struct CameraPreview: UIViewRepresentable {
+    let session: AVCaptureSession?
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: UIScreen.main.bounds)
+
+        guard let session = session else {
+            return view
+        }
+
+        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 struct GameView_Previews: PreviewProvider {

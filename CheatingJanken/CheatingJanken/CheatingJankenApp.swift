@@ -13,7 +13,7 @@ struct CheatingJankenApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CoreMLTestView()
+            StageView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
