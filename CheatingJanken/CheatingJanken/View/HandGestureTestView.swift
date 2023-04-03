@@ -127,7 +127,7 @@ class HandGestureDetector {
         case rock = "グー"
         case paper = "パー"
         case scissors = "チョキ"
-        case test = "手が検出されてるかテスト"
+        case test = "processObservationsメソッド内のif文は実行されています。"
         case unknown = "？？？"
     }
     
@@ -162,6 +162,7 @@ class HandGestureDetector {
         } else {
             currentGesture = .test
         }
+        print("手が検出されています。")
         
         delegate?.handGestureDetector(self, didRecognize: currentGesture) // delegate 経由で currentGesture を通知する
     }
