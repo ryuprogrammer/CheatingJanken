@@ -56,7 +56,7 @@ struct StageView: View {
                     .padding(10)
                 }
                 .fullScreenCover(item: $gameStage, content: { item in
-                    GameView()
+//                    GameView()
                 })
             }
         }

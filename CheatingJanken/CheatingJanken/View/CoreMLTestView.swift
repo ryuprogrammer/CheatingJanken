@@ -11,7 +11,7 @@ import CoreML
 
 struct CoreMLTestView: View {
     // HandPoseClassiferモデルの読み込み
-    let model = try! ImageClassifier2(configuration: MLModelConfiguration())
+    let model = try! MyImageClassifier002(configuration: MLModelConfiguration())
     // 推測した画像のラベルを格納
     @State var label: String = "push the button"
     // ダミーデータを格納
