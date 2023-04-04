@@ -17,8 +17,7 @@ struct HandGestureTestView: View {
         ZStack {
             CameraView(camera: camera) // @ObservedObjectを追加
                 .edgesIgnoringSafeArea(.all)
-            
-            Text(handGestureDetector.currentGesture.rawValue) // @Publishedプロパティを使用
+            Text(camera.currentGesture.rawValue) // @Publishedプロパティを使用
                 .font(.system(size: 50))
         }
         .onAppear {
@@ -47,7 +46,9 @@ struct CameraView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(camera: camera) // Coordinatorの初期化時にCameraModelを渡す
+        let coordinator = Coordinator(camera: camera)
+        camera.handGestureDetector.delegate = coordinator // Coordinator をデリゲートとして設定
+        return coordinator
     }
     
     class Coordinator: NSObject, HandGestureDetectorDelegate {
@@ -68,12 +69,15 @@ struct CameraView: UIViewRepresentable {
 
 class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
-    let handGestureDetector = HandGestureDetector()
+    let handGestureDetector: HandGestureDetector
     
     @Published var currentGesture: HandGestureDetector.HandGesture = .unknown // @Publishedプロパティに変更
     
     override init() {
+        handGestureDetector = HandGestureDetector()
+
         super.init()
+
         do {
             session.sessionPreset = .photo
             let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
@@ -132,6 +136,10 @@ class HandGestureDetector: ObservableObject {
     @Published var currentGesture: HandGesture = .unknown
     var delegate: HandGestureDetectorDelegate?
     
+    init(delegate: HandGestureDetectorDelegate? = nil) {
+        self.delegate = delegate
+    }
+
     func createDetectionRequest(pixelBuffer: CVPixelBuffer) throws -> VNImageBasedRequest {
         let request = VNDetectHumanHandPoseRequest()
         request.maximumHandCount = 1
