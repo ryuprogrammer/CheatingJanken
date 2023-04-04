@@ -11,21 +11,22 @@ import Vision
 
 struct HandGestureTestView: View {
     // CameraModelのインスタンス生成
-    @StateObject var camera = CameraModel()
+    @ObservedObject var camera = CameraModel()
+    @ObservedObject var handGestureDetector = HandGestureDetector()
     var body: some View {
         ZStack {
             CameraView(camera: camera) // @ObservedObjectを追加
                 .edgesIgnoringSafeArea(.all)
             
-            Text(camera.currentGesture.rawValue) // @Publishedプロパティを使用
+            Text(handGestureDetector.currentGesture.rawValue) // @Publishedプロパティを使用
                 .font(.system(size: 50))
         }
         .onAppear {
-            print(camera.currentGesture.rawValue)
+            print(handGestureDetector.currentGesture.rawValue)
         }
         // 念の為onChangeでcurrentGestureが変化しているか確認のために書きました。
-        .onChange(of: camera.currentGesture.rawValue) { newValue in
-            print(newValue)
+        .onChange(of: handGestureDetector.currentGesture.rawValue) { newValue in
+            print("Viewの値：\(newValue)")
         }
     }
 }
@@ -112,8 +113,6 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
         
         // 実際にジェスチャーからHandGestureを判別する
         handGestureDetector.processObservations(observations)
-        // currentGesture.rawValueが更新されているかチェック→ずっと？？？のまま。
-        print(currentGesture.rawValue)
     }
 }
 
@@ -122,16 +121,15 @@ protocol HandGestureDetectorDelegate: AnyObject {
 }
 
 // 検出されたジェスチャーからHandGestureを判別するクラス
-class HandGestureDetector {
+class HandGestureDetector: ObservableObject {
     enum HandGesture: String {
         case rock = "グー"
         case paper = "パー"
         case scissors = "チョキ"
-        case test = "processObservationsメソッド内のif文は実行されています。"
         case unknown = "？？？"
     }
     
-    var currentGesture: HandGesture = .unknown
+    @Published var currentGesture: HandGesture = .unknown
     var delegate: HandGestureDetectorDelegate?
     
     func createDetectionRequest(pixelBuffer: CVPixelBuffer) throws -> VNImageBasedRequest {
@@ -147,31 +145,109 @@ class HandGestureDetector {
             return
         }
         
-        let thumbTip = points[VNHumanHandPoseObservation.JointName.thumbTip.rawValue]?.location ?? .zero
+        // 指先
         let indexTip = points[VNHumanHandPoseObservation.JointName.indexTip.rawValue]?.location ?? .zero
         let middleTip = points[VNHumanHandPoseObservation.JointName.middleTip.rawValue]?.location ?? .zero
         let ringTip = points[VNHumanHandPoseObservation.JointName.ringTip.rawValue]?.location ?? .zero
         let littleTip = points[VNHumanHandPoseObservation.JointName.littleTip.rawValue]?.location ?? .zero
+        // 近位指節間(PIP)関節 ＝ 第二関節のこと
+        let indexPIP = points[VNHumanHandPoseObservation.JointName.indexPIP.rawValue]?.location ?? .zero
+        let middlePIP = points[VNHumanHandPoseObservation.JointName.middlePIP.rawValue]?.location ?? .zero
+        let ringPIP = points[VNHumanHandPoseObservation.JointName.ringPIP.rawValue]?.location ?? .zero
+        let littlePIP = points[VNHumanHandPoseObservation.JointName.littlePIP.rawValue]?.location ?? .zero
+        // 手首
+        let wrist = points[VNHumanHandPoseObservation.JointName.wrist.rawValue]?.location ?? .zero
         
-        if distance(from: indexTip, to: middleTip) < 50 && distance(from: middleTip, to: ringTip) < 50 && distance(from: ringTip, to: littleTip) < 50 {
-            currentGesture = .rock
-        } else if distance(from: thumbTip, to: indexTip) < 50 && distance(from: indexTip, to: middleTip) < 50 {
-            currentGesture = .paper
-        } else if distance(from: thumbTip, to: indexTip) > 50 && distance(from: indexTip, to: middleTip) > 50 && distance(from: middleTip, to: ringTip) > 50 && distance(from: ringTip, to: littleTip) < 50 {
-            currentGesture = .scissors
+        // 手首から指先の長さ
+        let wristToIndexTip = distance(from: wrist, to: indexTip)
+        let wristToMiddleTip = distance(from: wrist, to: middleTip)
+        let wristToRingTip = distance(from: wrist, to: ringTip)
+        let wristToLittleTip = distance(from: wrist, to: littleTip)
+        
+        // 手首から近位指節間(PIP)関節の長さ
+        let wristToIndexPIP = distance(from: wrist, to: indexPIP)
+        let wristToMiddlePIP = distance(from: wrist, to: middlePIP)
+        let wristToRingPIP = distance(from: wrist, to: ringPIP)
+        let wristToLittlePIP = distance(from: wrist, to: littlePIP)
+        
+        // 人差し指が曲がっているかチェック
+        if wristToIndexTip > wristToIndexPIP {
+            print("人差し指：まっすぐ")
+        } else if wristToIndexTip < wristToIndexPIP {
+            print("人差し指：曲がってる")
         } else {
-            currentGesture = .test
+            print("wristToIndexTip：\(wristToIndexTip)")
+            print("wristToIndexPIP：\(wristToIndexPIP)")
         }
-        print("手が検出されています。")
+        // 中指が曲がっているかチェック
+        if wristToMiddleTip > wristToMiddlePIP {
+            print("中指：まっすぐ")
+        } else if wristToMiddleTip < wristToMiddlePIP {
+            print("中指：曲がってる")
+        } else {
+            print("wristToMiddleTip：\(wristToMiddleTip)")
+            print("wristToMiddlePIP：\(wristToMiddlePIP)")
+        }
+        // 薬指が曲がっているかチェック
+        if wristToRingTip > wristToRingPIP {
+            print("薬指：まっすぐ")
+        } else if wristToRingTip < wristToRingPIP {
+            print("薬指：曲がってる")
+        } else {
+            print("wristToRingTip：\(wristToRingTip)")
+            print("wristToRingPIP：\(wristToRingPIP)")
+        }
+        // 小指が曲がっているかチェック
+        if wristToLittleTip > wristToLittlePIP {
+            print("小指：まっすぐ")
+        } else if wristToLittleTip < wristToLittlePIP {
+            print("小指：曲がってる")
+        } else {
+            print("wristToLittleTip：\(wristToLittleTip)")
+            print("wristToLittlePIP：\(wristToLittlePIP)")
+        }
+        
+        // HandPoseの判定(どの指が曲がっているかでグーチョキパーを判定する）
+        if
+            wristToIndexTip > wristToIndexPIP &&
+            wristToMiddleTip > wristToMiddlePIP &&
+            wristToRingTip > wristToRingPIP &&
+            wristToLittleTip > wristToLittlePIP {
+            // ４本の指が曲がっていないのでぱー
+            print("ぱー")
+            currentGesture = .paper
+        } else if
+            wristToIndexTip > wristToIndexPIP &&
+            wristToMiddleTip > wristToMiddlePIP &&
+            wristToRingTip < wristToRingPIP &&
+            wristToLittleTip < wristToLittlePIP {
+            // IndexとMiddleが曲がっていないのでちょき
+            print("ちょき")
+            currentGesture = .scissors
+        } else if
+            wristToIndexTip < wristToIndexPIP &&
+            wristToMiddleTip < wristToMiddlePIP &&
+            wristToRingTip < wristToRingPIP &&
+            wristToLittleTip < wristToLittlePIP {
+            // ４本の指が曲がっているのでぐー
+            print("ぐー")
+            currentGesture = .rock
+        } else {
+            print("？？？")
+            currentGesture = .unknown
+        }
+        
+        print(currentGesture.rawValue)
+        print("--------------")
         
         delegate?.handGestureDetector(self, didRecognize: currentGesture) // delegate 経由で currentGesture を通知する
     }
     
+    // 画面上の２点間の距離を三平方の定理より求める
     private func distance(from: CGPoint, to: CGPoint) -> CGFloat {
         return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))
     }
 }
-
 
 struct HandGestureTestView_Previews: PreviewProvider {
     static var previews: some View {
