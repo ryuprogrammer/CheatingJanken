@@ -23,6 +23,7 @@
 		5A1F0EF329CFFD00001E84B4 /* CoreMLTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */; };
 		5A826A6729D5B98F00320517 /* MyImageClassifier002.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A826A6629D5B98F00320517 /* MyImageClassifier002.mlmodel */; };
 		5ADF084029DB1F6C0052765D /* HandGestureTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */; };
+		5ADF084429DD4E8A0052765D /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLTestView.swift; sourceTree = "<group>"; };
 		5A826A6629D5B98F00320517 /* MyImageClassifier002.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyImageClassifier002.mlmodel; sourceTree = "<group>"; };
 		5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureTestView.swift; sourceTree = "<group>"; };
+		5ADF084329DD4E8A0052765D /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */,
 				5A1F0EB129C6F77F001E84B4 /* ContentView.swift */,
 				5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */,
+				5ADF084329DD4E8A0052765D /* SwiftUIView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				5A021F1D29D031D900692BDC /* ImageClassifier2.mlmodel in Sources */,
 				5A021F2D29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,
+				5ADF084429DD4E8A0052765D /* SwiftUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
