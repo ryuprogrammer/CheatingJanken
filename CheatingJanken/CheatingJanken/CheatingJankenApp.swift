@@ -13,7 +13,7 @@ struct CheatingJankenApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HandGestureTestView()
+            StageView()
         }
     }
 }

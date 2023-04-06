@@ -7,45 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A021F1D29D031D900692BDC /* ImageClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A021F1C29D031D900692BDC /* ImageClassifier2.mlmodel */; };
-		5A021F2B29D2BC4D00692BDC /* HandPoseClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A021F2A29D2BC4D00692BDC /* HandPoseClassifier.swift */; };
-		5A021F2D29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A021F2C29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel */; };
-		5A021F2F29D30C9B00692BDC /* MyHandPoseClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A021F2E29D30C9B00692BDC /* MyHandPoseClassifier.mlmodel */; };
 		5A1F0EAB29C6F77F001E84B4 /* CheatingJankenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EAA29C6F77F001E84B4 /* CheatingJankenApp.swift */; };
 		5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EAC29C6F77F001E84B4 /* Persistence.swift */; };
 		5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EAE29C6F77F001E84B4 /* CheatingJanken.xcdatamodeld */; };
-		5A1F0EB229C6F77F001E84B4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB129C6F77F001E84B4 /* ContentView.swift */; };
 		5A1F0EB429C6F780001E84B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB329C6F780001E84B4 /* Assets.xcassets */; };
 		5A1F0EB829C6F780001E84B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */; };
 		5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */; };
 		5A1F0EC129C6F848001E84B4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EC029C6F848001E84B4 /* GameView.swift */; };
-		5A1F0EF129CFFB8F001E84B4 /* MyHandPoseClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EF029CFFB8F001E84B4 /* MyHandPoseClassifier2.mlmodel */; };
-		5A1F0EF329CFFD00001E84B4 /* CoreMLTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */; };
-		5A826A6729D5B98F00320517 /* MyImageClassifier002.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5A826A6629D5B98F00320517 /* MyImageClassifier002.mlmodel */; };
-		5ADF084029DB1F6C0052765D /* HandGestureTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */; };
-		5ADF084429DD4E8A0052765D /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* SwiftUIView.swift */; };
+		5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* HandGestureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5A021F1C29D031D900692BDC /* ImageClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ImageClassifier2.mlmodel; sourceTree = "<group>"; };
-		5A021F2A29D2BC4D00692BDC /* HandPoseClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseClassifier.swift; sourceTree = "<group>"; };
-		5A021F2C29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyHandPoseClassifier3.mlmodel; sourceTree = "<group>"; };
-		5A021F2E29D30C9B00692BDC /* MyHandPoseClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyHandPoseClassifier.mlmodel; sourceTree = "<group>"; };
 		5A1F0EA729C6F77F001E84B4 /* CheatingJanken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheatingJanken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1F0EAA29C6F77F001E84B4 /* CheatingJankenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatingJankenApp.swift; sourceTree = "<group>"; };
 		5A1F0EAC29C6F77F001E84B4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5A1F0EAF29C6F77F001E84B4 /* CheatingJanken.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CheatingJanken.xcdatamodel; sourceTree = "<group>"; };
-		5A1F0EB129C6F77F001E84B4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5A1F0EB329C6F780001E84B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A1F0EB529C6F780001E84B4 /* CheatingJanken.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CheatingJanken.entitlements; sourceTree = "<group>"; };
 		5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		5A1F0EC029C6F848001E84B4 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		5A1F0EF029CFFB8F001E84B4 /* MyHandPoseClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyHandPoseClassifier2.mlmodel; sourceTree = "<group>"; };
-		5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLTestView.swift; sourceTree = "<group>"; };
-		5A826A6629D5B98F00320517 /* MyImageClassifier002.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MyImageClassifier002.mlmodel; sourceTree = "<group>"; };
-		5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureTestView.swift; sourceTree = "<group>"; };
-		5ADF084329DD4E8A0052765D /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		5ADF084329DD4E8A0052765D /* HandGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +86,7 @@
 			children = (
 				5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */,
 				5A1F0EC029C6F848001E84B4 /* GameView.swift */,
-				5A1F0EF229CFFD00001E84B4 /* CoreMLTestView.swift */,
-				5A1F0EB129C6F77F001E84B4 /* ContentView.swift */,
-				5ADF083F29DB1F6C0052765D /* HandGestureTestView.swift */,
-				5ADF084329DD4E8A0052765D /* SwiftUIView.swift */,
+				5ADF084329DD4E8A0052765D /* HandGestureView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,12 +101,6 @@
 		5A1F0EC429C6F891001E84B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5A1F0EF029CFFB8F001E84B4 /* MyHandPoseClassifier2.mlmodel */,
-				5A021F1C29D031D900692BDC /* ImageClassifier2.mlmodel */,
-				5A021F2A29D2BC4D00692BDC /* HandPoseClassifier.swift */,
-				5A021F2C29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel */,
-				5A021F2E29D30C9B00692BDC /* MyHandPoseClassifier.mlmodel */,
-				5A826A6629D5B98F00320517 /* MyImageClassifier002.mlmodel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,21 +175,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A021F2F29D30C9B00692BDC /* MyHandPoseClassifier.mlmodel in Sources */,
-				5ADF084029DB1F6C0052765D /* HandGestureTestView.swift in Sources */,
 				5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */,
 				5A1F0EAB29C6F77F001E84B4 /* CheatingJankenApp.swift in Sources */,
-				5A1F0EF129CFFB8F001E84B4 /* MyHandPoseClassifier2.mlmodel in Sources */,
 				5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */,
-				5A021F2B29D2BC4D00692BDC /* HandPoseClassifier.swift in Sources */,
-				5A826A6729D5B98F00320517 /* MyImageClassifier002.mlmodel in Sources */,
-				5A1F0EF329CFFD00001E84B4 /* CoreMLTestView.swift in Sources */,
-				5A1F0EB229C6F77F001E84B4 /* ContentView.swift in Sources */,
 				5A1F0EC129C6F848001E84B4 /* GameView.swift in Sources */,
-				5A021F1D29D031D900692BDC /* ImageClassifier2.mlmodel in Sources */,
-				5A021F2D29D307FC00692BDC /* MyHandPoseClassifier3.mlmodel in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,
-				5ADF084429DD4E8A0052765D /* SwiftUIView.swift in Sources */,
+				5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

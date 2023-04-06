@@ -9,23 +9,23 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-struct HandGestureTestView: View {
+struct HandGestureView: View {
     // CameraModelのインスタンス生成
     @ObservedObject var camera = CameraModel()
     // JankenGameのインスタンス生成
     @StateObject var jankenGame = JankenGame()
     // Viewの背景色のプロパティ
-    @State var backgroundColor = Color.red
+    @State private var backgroundColor = Color.red
     // カメラのオンオフを切り替えるプロパティ
-    @State var isCamera = false
+    @State private var isCamera = false
     // ジャンケンのカウントダウン用プロパティ
-    @State var jankenCount: Int = 0
+    @State private var jankenCount: Int = 0
     // 決められた時間毎にイベントを発行
-    @State var timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    @State private var timer = Timer.publish(every: 0.7, on: .main, in: .common).autoconnect()
     // ジャンケンの掛け声
-    @State var jankenText: String = ""
+    @State private var jankenText: String = ""
     // 敵のジャンケン結果の表示有無
-    @State var isShowEnemy: Bool = false
+    @State private var isShowEnemy: Bool = false
     
     var body: some View {
         ZStack {
@@ -55,13 +55,12 @@ struct HandGestureTestView: View {
                         .foregroundColor(Color.white)
                         .onReceive(timer) { _ in
                             jankenCount += 1
-                            if jankenCount >= 7 {
-                                timer.upstream.connect().cancel()
+                            if jankenCount >= 8 {
                                 camera.stop()
                                 jankenGame.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown)
                                 isShowEnemy = true
-                                isCamera.toggle()
-                                print("あなた：\(camera.handGestureDetector.currentGesture.rawValue)")
+                                isCamera = false
+                                timer.upstream.connect().cancel()
                             }
                         }
                 }
@@ -86,7 +85,7 @@ struct HandGestureTestView: View {
                     }
                     isCamera.toggle()
                 } label: {
-                    Text(isCamera ? "もう一回" : "ストップ")
+                    Text(isCamera ? "ストップ" : "もう一回")
                         .bold()
                         .font(.system(size: 50))
                         .foregroundColor(Color.white)
@@ -96,15 +95,13 @@ struct HandGestureTestView: View {
                 }
             }
             .onChange(of: jankenCount) { jankenCount in
+                // カウント毎にテキストを変更する
                 switch jankenCount {
-                case 0: jankenText = ""
-                case 1: jankenText = "最初は、、"
-                case 2: jankenText = "ぐー"
-                case 3: jankenText = "じゃんけん、、"
-                case 4: jankenText = "ぽん！！！"
-                case 5: jankenText = "ぽん！！！"
-                case 6: jankenText = "ぽん！！！"
-                case 7: jankenText = "ぽん！！！"
+                case 0...3: jankenText = "Ready???"
+                case 4: jankenText = "最初は、、"
+                case 5: jankenText = "ぐー！"
+                case 6: jankenText = "じゃんけん、、"
+                case 7,8: jankenText = "ぽん！！！"
                 default: break
                 }
             }
@@ -127,7 +124,7 @@ class JankenGame: ObservableObject {
     // ジャンケンの結果を格納するプロパティ
     var result: String = ""
     // 勝率を格納するプロパティ（JankenResultの計算上「偶数」にする）
-    let winRate: Int = 20 // 20 %
+    let winRate: Int = 2 // 2 %
     
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(userHandGesture: HandGestureDetector.HandGesture) {
@@ -428,8 +425,8 @@ class HandGestureDetector: ObservableObject {
     }
 }
 
-struct HandGestureTestView_Previews: PreviewProvider {
+struct HandGestureView_Previews: PreviewProvider {
     static var previews: some View {
-        HandGestureTestView()
+        HandGestureView()
     }
 }
