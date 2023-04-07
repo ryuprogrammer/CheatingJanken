@@ -8,17 +8,8 @@
 import SwiftUI
 
 struct StageView: View {
-    @State var stage: [stageSituation] = [
-        stageSituation(stage: "ネズミ", situation: true, pasentage: 80),
-        stageSituation(stage: "うさぎ", situation: true, pasentage: 60),
-        stageSituation(stage: "犬", situation: true, pasentage: 50),
-        stageSituation(stage: "ぞう", situation: false, pasentage: 30),
-        stageSituation(stage: "パンダ", situation: false, pasentage: 20),
-        stageSituation(stage: "人間", situation: false, pasentage: 8),
-        stageSituation(stage: "ロボット", situation: false, pasentage: 2)
-    ]
-    
-    @State var gameStage: stageSituation? = nil
+    @State private var gameStage: StageSituation? = nil
+    @ObservedObject var stageViewModel = StageViewModel()
     
     var body: some View {
         VStack {
@@ -31,7 +22,7 @@ struct StageView: View {
             
             ScrollView {
                 VStack {
-                    ForEach(stage) { stage in
+                    ForEach(stageViewModel.stageSituations, id: \.self) { stage in
                         Button {
                             gameStage = stage
                         } label: {
@@ -42,7 +33,7 @@ struct StageView: View {
                                     .foregroundColor(Color.white)
                                     .frame(width: 30)
                                     .aspectRatio(contentMode: .fill)
-                                Text("\(stage.stage)   \(stage.pasentage) %")
+                                Text("\(stage.stage)   \(stage.winRate) %")
                                     .font(.title)
                                     .foregroundColor(Color.white)
                                 Spacer()
@@ -55,20 +46,13 @@ struct StageView: View {
                     .cornerRadius(20)
                     .padding(10)
                 }
-                .fullScreenCover(item: $gameStage, content: { item in
-                    HandGestureView()
+                .fullScreenCover(item: $gameStage, content: { gameStage in
+                    HandGestureView(gameStage: gameStage)
                 })
             }
         }
         .background(Color("background"))
     }
-}
-
-struct stageSituation: Identifiable {
-    let id: UUID = UUID()
-    let stage: String
-    let situation: Bool
-    let pasentage: Int
 }
 
 struct StageView_Previews: PreviewProvider {

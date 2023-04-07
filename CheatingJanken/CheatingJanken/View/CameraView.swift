@@ -9,7 +9,7 @@ import SwiftUI
 
 // カメラのプレビューレイヤーを設定
 struct CameraView: UIViewRepresentable {
-    @ObservedObject var camera: CameraModel
+    @ObservedObject var camera: CameraViewModel
     
     func makeUIView(context: Context) -> UIView {
         let previewView = UIView(frame: UIScreen.main.bounds)
@@ -29,9 +29,9 @@ struct CameraView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, HandGestureDetectorDelegate {
-        @ObservedObject var camera: CameraModel // CameraModelを監視可能にするために@ObservedObjectを追加
+        @ObservedObject var camera: CameraViewModel // CameraModelを監視可能にするために@ObservedObjectを追加
         
-        init(camera: CameraModel) {
+        init(camera: CameraViewModel) {
             self.camera = camera
         }
         

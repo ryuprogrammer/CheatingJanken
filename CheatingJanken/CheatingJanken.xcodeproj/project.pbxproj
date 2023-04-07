@@ -13,12 +13,13 @@
 		5A1F0EB429C6F780001E84B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB329C6F780001E84B4 /* Assets.xcassets */; };
 		5A1F0EB829C6F780001E84B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */; };
 		5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */; };
-		5A1F0EC129C6F848001E84B4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EC029C6F848001E84B4 /* GameView.swift */; };
 		5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* HandGestureView.swift */; };
-		5ADF084E29DFBCED0052765D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* CameraModel.swift */; };
+		5ADF084E29DFBCED0052765D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* CameraViewModel.swift */; };
 		5ADF085029DFBD410052765D /* HandGestureDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084F29DFBD410052765D /* HandGestureDetector.swift */; };
-		5ADF085229DFBDE90052765D /* JankenGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085129DFBDE90052765D /* JankenGameModel.swift */; };
+		5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085129DFBDE90052765D /* HandGestureModel.swift */; };
 		5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085329DFBE3D0052765D /* CameraView.swift */; };
+		5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085529E00B2C0052765D /* StageSituation.swift */; };
+		5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085929E020DE0052765D /* StageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +31,13 @@
 		5A1F0EB529C6F780001E84B4 /* CheatingJanken.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CheatingJanken.entitlements; sourceTree = "<group>"; };
 		5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
-		5A1F0EC029C6F848001E84B4 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		5ADF084329DD4E8A0052765D /* HandGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureView.swift; sourceTree = "<group>"; };
-		5ADF084D29DFBCED0052765D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		5ADF084D29DFBCED0052765D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		5ADF084F29DFBD410052765D /* HandGestureDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureDetector.swift; sourceTree = "<group>"; };
-		5ADF085129DFBDE90052765D /* JankenGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JankenGameModel.swift; sourceTree = "<group>"; };
+		5ADF085129DFBDE90052765D /* HandGestureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureModel.swift; sourceTree = "<group>"; };
 		5ADF085329DFBE3D0052765D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		5ADF085529E00B2C0052765D /* StageSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSituation.swift; sourceTree = "<group>"; };
+		5ADF085929E020DE0052765D /* StageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */,
-				5A1F0EC029C6F848001E84B4 /* GameView.swift */,
 				5ADF084329DD4E8A0052765D /* HandGestureView.swift */,
+				5ADF085329DFBE3D0052765D /* CameraView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -102,9 +104,8 @@
 		5A1F0EC329C6F889001E84B4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5ADF084D29DFBCED0052765D /* CameraModel.swift */,
-				5ADF085329DFBE3D0052765D /* CameraView.swift */,
-				5ADF085129DFBDE90052765D /* JankenGameModel.swift */,
+				5ADF085929E020DE0052765D /* StageViewModel.swift */,
+				5ADF084D29DFBCED0052765D /* CameraViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -112,7 +113,9 @@
 		5A1F0EC429C6F891001E84B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5ADF085129DFBDE90052765D /* HandGestureModel.swift */,
 				5ADF084F29DFBD410052765D /* HandGestureDetector.swift */,
+				5ADF085529E00B2C0052765D /* StageSituation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,11 +195,12 @@
 				5A1F0EAB29C6F77F001E84B4 /* CheatingJankenApp.swift in Sources */,
 				5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */,
 				5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */,
-				5A1F0EC129C6F848001E84B4 /* GameView.swift in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,
-				5ADF085229DFBDE90052765D /* JankenGameModel.swift in Sources */,
+				5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */,
+				5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */,
 				5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */,
-				5ADF084E29DFBCED0052765D /* CameraModel.swift in Sources */,
+				5ADF084E29DFBCED0052765D /* CameraViewModel.swift in Sources */,
+				5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

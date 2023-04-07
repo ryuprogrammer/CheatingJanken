@@ -9,15 +9,16 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate, HandGestureDetectorDelegate {
+class CameraViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate, HandGestureDetectorDelegate {
     func handGestureDetector(_ handGestureDetector: HandGestureDetector, didRecognize gesture: HandGestureDetector.HandGesture) {
+        // 何もしない
     }
     
-    let session = AVCaptureSession()
     let handGestureDetector: HandGestureDetector
-    weak var delegate: HandGestureDetectorDelegate?
+    private let session = AVCaptureSession()
+    private var delegate: HandGestureDetectorDelegate?
     
-    @Published var currentGesture: HandGestureDetector.HandGesture = .unknown // @Publishedプロパティに変更
+    @Published var currentGesture: HandGestureDetector.HandGesture = .unknown
     
     override init() {
         handGestureDetector = HandGestureDetector()

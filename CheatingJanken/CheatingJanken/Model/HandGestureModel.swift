@@ -8,7 +8,7 @@
 import Foundation
 
 // ジャンケンゲームを実装する構造体
-class JankenGameModel: ObservableObject {
+class HandGestureModel {
     // ジャンケンの結果のenum
     enum gameResult: String {
         case win = "勝ち！！"
@@ -20,11 +20,9 @@ class JankenGameModel: ObservableObject {
     var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
     // ジャンケンの結果を格納するプロパティ
     var result: gameResult = .aiko
-    // 勝率を格納するプロパティ（JankenResultの計算上「偶数」にする）
-    let winRate: Int = 2 // 2 %
     
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-    func JankenResult(userHandGesture: HandGestureDetector.HandGesture) {
+    func JankenResult(userHandGesture: HandGestureDetector.HandGesture, winRate: Int) {
         let random = Int.random(in: 1...100)
         if random <= winRate { // プレーヤーの勝ち
             result = .win
