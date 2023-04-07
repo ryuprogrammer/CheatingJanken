@@ -67,6 +67,10 @@ struct GameView: View {
                 
                 if isStart {
                     ZStack {
+//                        CameraPreview(session: handPoseClassifier.cameraFeedSession)
+//                            .frame(width: UIScreen.main.bounds.width/2,
+//                                   height: UIScreen.main.bounds.height/2)
+//                            .cornerRadius(70)
 //                        Image("camera")
 //                            .resizable()
 //                            .scaledToFit()

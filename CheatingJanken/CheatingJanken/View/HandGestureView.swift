@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import AVFoundation
 import Vision
+import AVFoundation
 
 struct HandGestureView: View {
     // CameraModelのインスタンス生成
     @ObservedObject var camera = CameraModel()
     // JankenGameのインスタンス生成
-    @StateObject var jankenGame = JankenGame()
+    @StateObject var jankenGame = JankenGameModel()
     // Viewの背景色のプロパティ
     @State private var backgroundColor = Color.red
     // カメラのオンオフを切り替えるプロパティ
@@ -30,33 +30,40 @@ struct HandGestureView: View {
     var body: some View {
         ZStack {
             CameraView(camera: camera)
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea(.all)
             
-            backgroundColor.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
+            backgroundColor
+                .opacity(0.4)
+                .ignoresSafeArea(.all)
             
             VStack {
                 // 敵のジャンケン結果
                 if isShowEnemy {
-                    Text("てき：\(jankenGame.enemyHandGesture.rawValue)")
+                    Text("てき")
                         .bold()
-                        .font(.system(size: 50))
+                        .font(.system(size: 30))
                         .foregroundColor(Color.white)
                     
-                    Text("結果：\(jankenGame.result)")
+                    Text("\(jankenGame.enemyHandGesture.rawValue)")
                         .bold()
-                        .font(.system(size: 50))
+                        .font(.system(size: 100))
+                        .foregroundColor(Color.white)
+                    
+                    Text("\(jankenGame.result.rawValue)")
+                        .bold()
+                        .font(.system(size: 100))
                         .foregroundColor(Color.white)
                 } else {
                     // ジャンケンのカウントダウン
                     Text(jankenText)
                         .bold()
-                        .font(.system(size: 50))
+                        .font(.system(size: 80))
                         .foregroundColor(Color.white)
                         .onReceive(timer) { _ in
                             jankenCount += 1
-                            if jankenCount >= 8 {
+                            if jankenCount >= 9 {
                                 camera.stop()
+                                // ジャンケンの結果を出力するメソッドの実行
                                 jankenGame.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown)
                                 isShowEnemy = true
                                 isCamera = false
@@ -65,9 +72,14 @@ struct HandGestureView: View {
                         }
                 }
                 
-                Text("あなた：\(camera.handGestureDetector.currentGesture.rawValue)") // @Publishedプロパティを使用
+                Text("\(camera.handGestureDetector.currentGesture.rawValue)") // @Publishedプロパティを使用
                     .bold()
-                    .font(.system(size: 50))
+                    .font(.system(size: 100))
+                    .foregroundColor(Color.white)
+                
+                Text("あなた")
+                    .bold()
+                    .font(.system(size: 30))
                     .foregroundColor(Color.white)
                 
                 Spacer()
@@ -80,7 +92,7 @@ struct HandGestureView: View {
                     } else {
                         isShowEnemy = false
                         jankenCount = 0
-                        timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+                        timer = Timer.publish(every: 0.7, on: .main, in: .common).autoconnect()
                         camera.start()
                     }
                     isCamera.toggle()
@@ -89,19 +101,20 @@ struct HandGestureView: View {
                         .bold()
                         .font(.system(size: 50))
                         .foregroundColor(Color.white)
-                        .frame(width: 200, height: 80)
-                        .background(Color.black.opacity(0.5))
+                        .padding()
+                        .frame(width: 230, height: 85)
+                        .background(Color.white.opacity(0.3))
                         .cornerRadius(20)
                 }
             }
             .onChange(of: jankenCount) { jankenCount in
                 // カウント毎にテキストを変更する
                 switch jankenCount {
-                case 0...3: jankenText = "Ready???"
-                case 4: jankenText = "最初は、、"
-                case 5: jankenText = "ぐー！"
-                case 6: jankenText = "じゃんけん、、"
-                case 7,8: jankenText = "ぽん！！！"
+                case 0...4: jankenText = "Ready ???"
+                case 5: jankenText = "最初は、、"
+                case 6: jankenText = "ぐー！"
+                case 7: jankenText = "じゃんけん"
+                case 8,9: jankenText = "ぽん！！！"
                 default: break
                 }
             }
@@ -115,85 +128,13 @@ struct HandGestureView: View {
     }
 }
 
-// ジャンケンゲームを実装する構造体
-class JankenGame: ObservableObject {
-    // HandGestureDetectorのインスタンス生成
-    let handGestureDetector = HandGestureDetector()
-    // 敵のジャンケン結果を格納するプロパティ
-    var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
-    // ジャンケンの結果を格納するプロパティ
-    var result: String = ""
-    // 勝率を格納するプロパティ（JankenResultの計算上「偶数」にする）
-    let winRate: Int = 2 // 2 %
-    
-    // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-    func JankenResult(userHandGesture: HandGestureDetector.HandGesture) {
-        let random = Int.random(in: 1...100)
-        if random <= winRate { // プレーヤーの勝ち
-            result = "勝ち！"
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .scissors
-            case .scissors: enemyHandGesture = .paper
-            case .paper: enemyHandGesture = .rock
-            default: break
-            }
-        } else if random <= (100-winRate)/2 { // プレーヤーの負け
-            result = "負け、、"
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .paper
-            case .scissors: enemyHandGesture = .rock
-            case .paper: enemyHandGesture = .scissors
-            default: break
-            }
-        } else { // あいこ
-            result = "あいこ"
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .rock
-            case .scissors: enemyHandGesture = .scissors
-            case .paper: enemyHandGesture = .paper
-            default: break
-            }
-        }
+struct HandGestureView_Previews: PreviewProvider {
+    static var previews: some View {
+        HandGestureView()
     }
 }
 
-// カメラのプレビューレイヤーを設定
-struct CameraView: UIViewRepresentable {
-    @ObservedObject var camera: CameraModel
-    
-    func makeUIView(context: Context) -> UIView {
-        let previewView = UIView(frame: UIScreen.main.bounds)
-        camera.addPreviewLayer(to: previewView)
-        context.coordinator.camera = camera // CoordinatorにCameraModelを渡す
-        return previewView
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // ここでは何もしない。
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        let coordinator = Coordinator(camera: camera)
-        camera.handGestureDetector.delegate = coordinator // Coodinatorをデリゲートとして設定
-        return coordinator
-    }
-    
-    class Coordinator: NSObject, HandGestureDetectorDelegate {
-        @ObservedObject var camera: CameraModel // CameraModelを監視可能にするために@ObservedObjectを追加
-        
-        init(camera: CameraModel) {
-            self.camera = camera
-        }
-        
-        // HandGestureを判定してcurrentGesture（画面に表示するプロパティ）に格納
-        func handGestureDetector(_ handGestureDetector: HandGestureDetector, didRecognize gesture: HandGestureDetector.HandGesture) {
-            DispatchQueue.main.async {
-                self.camera.currentGesture = gesture // @Publishedプロパティに値を設定
-            }
-        }
-    }
-}
-
+// CameraModel
 class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate, HandGestureDetectorDelegate {
     func handGestureDetector(_ handGestureDetector: HandGestureDetector, didRecognize gesture: HandGestureDetector.HandGesture) {
     }
@@ -260,6 +201,93 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
     }
 }
 
+// カメラのプレビューレイヤーを設定
+struct CameraView: UIViewRepresentable {
+    @ObservedObject var camera: CameraModel
+    
+    func makeUIView(context: Context) -> UIView {
+        let previewView = UIView(frame: UIScreen.main.bounds)
+        camera.addPreviewLayer(to: previewView)
+        context.coordinator.camera = camera // CoordinatorにCameraModelを渡す
+        return previewView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // ここでは何もしない。
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        let coordinator = Coordinator(camera: camera)
+        camera.handGestureDetector.delegate = coordinator // Coodinatorをデリゲートとして設定
+        return coordinator
+    }
+    
+    class Coordinator: NSObject, HandGestureDetectorDelegate {
+        @ObservedObject var camera: CameraModel // CameraModelを監視可能にするために@ObservedObjectを追加
+        
+        init(camera: CameraModel) {
+            self.camera = camera
+        }
+        
+        // HandGestureを判定してcurrentGesture（画面に表示するプロパティ）に格納
+        func handGestureDetector(_ handGestureDetector: HandGestureDetector, didRecognize gesture: HandGestureDetector.HandGesture) {
+            DispatchQueue.main.async {
+                // @Publishedプロパティに値を設定
+                self.camera.currentGesture = gesture
+            }
+        }
+    }
+}
+
+// JankenGameModel
+// ジャンケンゲームを実装する構造体
+class JankenGameModel: ObservableObject {
+    // ジャンケンの結果のenum
+    enum gameResult: String {
+        case win = "勝ち！！"
+        case lose = "負け。。"
+        case aiko = "あいこ"
+    }
+    
+    // 敵のジャンケン結果を格納するプロパティ
+    var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
+    // ジャンケンの結果を格納するプロパティ
+    var result: gameResult = .aiko
+    // 勝率を格納するプロパティ（JankenResultの計算上「偶数」にする）
+    let winRate: Int = 2 // 2 %
+    
+    // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
+    func JankenResult(userHandGesture: HandGestureDetector.HandGesture) {
+        let random = Int.random(in: 1...100)
+        if random <= winRate { // プレーヤーの勝ち
+            result = .win
+            switch userHandGesture {
+            case .rock: enemyHandGesture = .scissors
+            case .scissors: enemyHandGesture = .paper
+            case .paper: enemyHandGesture = .rock
+            default: break
+            }
+        } else if random <= (100-winRate)/2 { // プレーヤーの負け
+            result = .lose
+            switch userHandGesture {
+            case .rock: enemyHandGesture = .paper
+            case .scissors: enemyHandGesture = .rock
+            case .paper: enemyHandGesture = .scissors
+            default: break
+            }
+        } else { // あいこ
+            result = .aiko
+            switch userHandGesture {
+            case .rock: enemyHandGesture = .rock
+            case .scissors: enemyHandGesture = .scissors
+            case .paper: enemyHandGesture = .paper
+            default: break
+            }
+        }
+    }
+}
+
+// HandGestureDetector
 // デリゲートのプロトコルを定義
 protocol HandGestureDetectorDelegate: AnyObject {
     // HandGestureDetectorのHandGestureを監視してデリゲート経由でViewに通知する
@@ -270,9 +298,9 @@ protocol HandGestureDetectorDelegate: AnyObject {
 class HandGestureDetector: ObservableObject {
     // ジャンケンの手の種類のenum
     enum HandGesture: String {
-        case rock = "グー"
-        case paper = "パー"
-        case scissors = "チョキ"
+        case rock = "✊"
+        case paper = "✋"
+        case scissors = "✌"
         case unknown = "？？？"
     }
     
@@ -320,12 +348,6 @@ class HandGestureDetector: ObservableObject {
         // 手首
         let wrist = points[VNHumanHandPoseObservation.JointName.wrist.rawValue]?.location ?? .zero
         
-        // 親指の指先と関節２つと手根中手骨
-        let thumbTip = points[VNHumanHandPoseObservation.JointName.thumbTip.rawValue]?.location ?? .zero
-        let thumbIP = points[VNHumanHandPoseObservation.JointName.thumbIP.rawValue]?.location ?? .zero
-        let thumbMP = points[VNHumanHandPoseObservation.JointName.thumbMP.rawValue]?.location ?? .zero
-        let thumbCMC = points[VNHumanHandPoseObservation.JointName.thumbCMC.rawValue]?.location ?? .zero
-        
         // 手首から指先の長さ
         let wristToIndexTip = distance(from: wrist, to: indexTip)
         let wristToMiddleTip = distance(from: wrist, to: middleTip)
@@ -337,10 +359,6 @@ class HandGestureDetector: ObservableObject {
         let wristToMiddlePIP = distance(from: wrist, to: middlePIP)
         let wristToRingPIP = distance(from: wrist, to: ringPIP)
         let wristToLittlePIP = distance(from: wrist, to: littlePIP)
-        
-        // 親指の関節の角度
-        let thumbIpAngle = angleFromThreePoints(point1: thumbTip, point2: thumbIP, point3: thumbMP)
-        let thumbMpAngle = angleFromThreePoints(point1: thumbIP, point2: thumbMP, point3: thumbCMC)
         
         // 人差し指が曲がっているかチェック
         if wristToIndexTip > wristToIndexPIP {
@@ -366,10 +384,6 @@ class HandGestureDetector: ObservableObject {
         } else if wristToLittleTip < wristToLittlePIP {
             print("小指：曲がってる")
         }
-        
-        print("親指")
-        print("thumbIpAngle：\(thumbIpAngle)")
-        print("thumbMpAngle：\(thumbMpAngle)")
         
         // HandPoseの判定(どの指が曲がっているかでグーチョキパーを判定する）
         if
@@ -408,25 +422,5 @@ class HandGestureDetector: ObservableObject {
     private func distance(from: CGPoint, to: CGPoint) -> CGFloat {
         return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))
     }
-    
-    // 画面上の３点の角度を求める
-    private func angleFromThreePoints(point1: CGPoint, point2: CGPoint, point3: CGPoint) -> Double {
-        let v1x = point2.x - point1.x
-        let v1y = point2.y - point1.y
-        let v2x = point2.x - point3.x
-        let v2y = point2.y - point3.y
-        
-        let dotProduct = v1x * v2x + v1y * v2y
-        let length_v1 = sqrt(v1x * v1x + v1y * v1y)
-        let length_v2 = sqrt(v2x * v2x + v2y * v2y)
-        
-        let angle = acos(dotProduct / (length_v1 * length_v2))
-        return angle
-    }
 }
 
-struct HandGestureView_Previews: PreviewProvider {
-    static var previews: some View {
-        HandGestureView()
-    }
-}
