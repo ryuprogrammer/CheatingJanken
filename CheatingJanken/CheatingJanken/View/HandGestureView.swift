@@ -9,9 +9,7 @@ import SwiftUI
 
 struct HandGestureView: View {
     // CameraModelのインスタンス生成
-    @ObservedObject private var camera = CameraViewModel()
-    // JankenGameのインスタンス生成
-    @State private var handGestureModel = HandGestureModel()
+    @ObservedObject private var camera = HandGestureViewModel()
     // Viewの背景色のプロパティ
     @State private var backgroundColor = Color.red
     // カメラのオンオフを切り替えるプロパティ
@@ -51,12 +49,12 @@ struct HandGestureView: View {
                     .foregroundColor(Color.white)
                 // 敵のジャンケン結果
                 if isShowEnemy {
-                    Text("\(handGestureModel.enemyHandGesture.rawValue)")
+                    Text("\(camera.handGestureModel.enemyHandGesture.rawValue)")
                         .bold()
                         .font(.system(size: 150))
                         .foregroundColor(Color.white)
                     
-                    Text("\(handGestureModel.result.rawValue)")
+                    Text("\(camera.handGestureModel.result.rawValue)")
                         .bold()
                         .font(.system(size: 100))
                         .foregroundColor(Color.white)
@@ -110,7 +108,7 @@ struct HandGestureView: View {
             if jankenCount >= 20 {
                 camera.stop()
                 // ジャンケンの結果を出力
-                handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: gameStage.winRate)
+                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: gameStage.winRate)
                 isShowEnemy = true
                 isCamera = false
                 timer.upstream.connect().cancel()

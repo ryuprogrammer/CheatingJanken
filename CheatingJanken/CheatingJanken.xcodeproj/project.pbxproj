@@ -14,7 +14,7 @@
 		5A1F0EB829C6F780001E84B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */; };
 		5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */; };
 		5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* HandGestureView.swift */; };
-		5ADF084E29DFBCED0052765D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* CameraViewModel.swift */; };
+		5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */; };
 		5ADF085029DFBD410052765D /* HandGestureDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084F29DFBD410052765D /* HandGestureDetector.swift */; };
 		5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085129DFBDE90052765D /* HandGestureModel.swift */; };
 		5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085329DFBE3D0052765D /* CameraView.swift */; };
@@ -32,7 +32,7 @@
 		5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		5ADF084329DD4E8A0052765D /* HandGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureView.swift; sourceTree = "<group>"; };
-		5ADF084D29DFBCED0052765D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureViewModel.swift; sourceTree = "<group>"; };
 		5ADF084F29DFBD410052765D /* HandGestureDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureDetector.swift; sourceTree = "<group>"; };
 		5ADF085129DFBDE90052765D /* HandGestureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureModel.swift; sourceTree = "<group>"; };
 		5ADF085329DFBE3D0052765D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				5ADF085929E020DE0052765D /* StageViewModel.swift */,
-				5ADF084D29DFBCED0052765D /* CameraViewModel.swift */,
+				5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 				5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */,
 				5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */,
 				5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */,
-				5ADF084E29DFBCED0052765D /* CameraViewModel.swift in Sources */,
+				5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */,
 				5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
