@@ -10,7 +10,7 @@ import Foundation
 // ジャンケンゲームを実装する構造体
 class HandGestureModel {
     // ジャンケンの結果のenum
-    enum gameResult: String {
+    enum GameResult: String {
         case win = "勝ち！！"
         case lose = "負け。。"
         case aiko = "あいこ"
@@ -19,7 +19,7 @@ class HandGestureModel {
     // 敵のジャンケン結果を格納するプロパティ
     var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
     // ジャンケンの結果を格納するプロパティ
-    var result: gameResult = .aiko
+    var result: GameResult = .aiko
     
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(userHandGesture: HandGestureDetector.HandGesture, winRate: Int) {

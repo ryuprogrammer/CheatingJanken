@@ -20,6 +20,7 @@
 		5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085329DFBE3D0052765D /* CameraView.swift */; };
 		5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085529E00B2C0052765D /* StageSituation.swift */; };
 		5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085929E020DE0052765D /* StageViewModel.swift */; };
+		5ADF088C29E28A930052765D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF088B29E28A930052765D /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5ADF085329DFBE3D0052765D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		5ADF085529E00B2C0052765D /* StageSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSituation.swift; sourceTree = "<group>"; };
 		5ADF085929E020DE0052765D /* StageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
+		5ADF088B29E28A930052765D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				5ADF085129DFBDE90052765D /* HandGestureModel.swift */,
 				5ADF084F29DFBD410052765D /* HandGestureDetector.swift */,
 				5ADF085529E00B2C0052765D /* StageSituation.swift */,
+				5ADF088B29E28A930052765D /* ColorExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				5ADF085029DFBD410052765D /* HandGestureDetector.swift in Sources */,
 				5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */,
 				5A1F0EAB29C6F77F001E84B4 /* CheatingJankenApp.swift in Sources */,
+				5ADF088C29E28A930052765D /* ColorExtension.swift in Sources */,
 				5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */,
 				5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,

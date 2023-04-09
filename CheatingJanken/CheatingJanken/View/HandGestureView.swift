@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HandGestureView: View {
-    // CameraModelのインスタンス生成
+    // HandGestureViewModelのインスタンス生成
     @ObservedObject private var camera = HandGestureViewModel()
     // Viewの背景色のプロパティ
     @State private var backgroundColor = Color.red

@@ -18,7 +18,7 @@ struct StageView: View {
                 .bold()
                 .foregroundColor(Color.white)
                 .frame(maxWidth: .infinity, maxHeight: 80)
-                .background(Color("ground"))
+                .background(Color.customGround)
             
             ScrollView {
                 VStack {
@@ -40,7 +40,7 @@ struct StageView: View {
                             }
                             .padding()
                             .frame(width: 300, height: 80)
-                            .background(Color("ground"))
+                            .background(Color.customGround)
                         }
                     }
                     .cornerRadius(20)
@@ -51,7 +51,7 @@ struct StageView: View {
                 })
             }
         }
-        .background(Color("background"))
+        .background(Color.customBackground)
     }
 }
 
