@@ -7,14 +7,14 @@
 
 import Foundation
 
-class StageViewModel: ObservableObject {
-    @Published var stageSituations: [StageSituation] = [
-        StageSituation(stage: "ネズミ", situation: true, winRate: 80),
-        StageSituation(stage: "うさぎ", situation: true, winRate: 60),
-        StageSituation(stage: "犬", situation: true, winRate: 50),
-        StageSituation(stage: "ぞう", situation: false, winRate: 30),
-        StageSituation(stage: "パンダ", situation: false, winRate: 20),
-        StageSituation(stage: "人間", situation: false, winRate: 8),
-        StageSituation(stage: "ロボット", situation: false, winRate: 2)
+struct StageViewModel {
+    let stageSituations: [StageSituation] = [
+        StageSituation(imageName: "001", winRate: 0.8),
+        StageSituation(imageName: "002", winRate: 0.6),
+        StageSituation(imageName: "003", winRate: 0.5),
+        StageSituation(imageName: "004", winRate: 0.4),
+        StageSituation(imageName: "005", winRate: 0.3),
+        StageSituation(imageName: "006", winRate: 0.2),
+        StageSituation(imageName: "007", winRate: 0.1)
     ]
 }

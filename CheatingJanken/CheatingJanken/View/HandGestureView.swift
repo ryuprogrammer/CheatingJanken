@@ -30,30 +30,42 @@ struct HandGestureView: View {
             CameraView(camera: camera)
                 .ignoresSafeArea(.all)
             
-            backgroundColor
-                .opacity(0.3)
-                .ignoresSafeArea(.all)
+            GeometryReader { geometry in
+                // iPhoneの形状に合わせてmint色の縁を表示
+                RoundedRectangle(cornerRadius: 60)
+                    .stroke(backgroundColor.opacity(0.5), lineWidth: 50)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+            }
             
             VStack {
                 Spacer()
                     .frame(height: 100)
                 
-                Text("勝率：\(gameStage.winRate) %")
+                Text("勝率：\(Int(gameStage.winRate*100)) %")
                     .bold()
                     .font(.system(size: 30))
                     .foregroundColor(Color.white)
                 
-                Text("あいて：\(gameStage.stage)")
-                    .bold()
-                    .font(.system(size: 30))
-                    .foregroundColor(Color.white)
-                // 敵のジャンケン結果
-                if isShowEnemy {
-                    Text("\(camera.handGestureModel.enemyHandGesture.rawValue)")
-                        .bold()
-                        .font(.system(size: 150))
-                        .foregroundColor(Color.white)
+                HStack {
+                    if isShowEnemy {
+                        // キャラクターのジャンケン結果を表示
+                        Text("\(camera.handGestureModel.enemyHandGesture.rawValue)")
+                            .bold()
+                            .font(.system(size: 100))
+                            .foregroundColor(Color.white)
+                            .rotationEffect(Angle(degrees: -30))
+                    }
                     
+                    // キャラクターを配置
+                    Image("\(gameStage.imageName)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                }
+                
+                if isShowEnemy {
+                    // ジャンケン結果を表示
                     Text("\(camera.handGestureModel.result.rawValue)")
                         .bold()
                         .font(.system(size: 100))
@@ -66,10 +78,12 @@ struct HandGestureView: View {
                         .foregroundColor(Color.white)
                 }
                 
+                // ユーザーのHandPoseを表示
                 Text("\(camera.handGestureDetector.currentGesture.rawValue)")
                     .bold()
                     .font(.system(size: 100))
                     .foregroundColor(Color.white)
+                    .rotation3DEffect(Angle(degrees: 180), axis: (x: 0, y: 1, z: 0))
                 
                 Text("あなた")
                     .bold()
@@ -108,7 +122,7 @@ struct HandGestureView: View {
             if jankenCount >= 20 {
                 camera.stop()
                 // ジャンケンの結果を出力
-                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: gameStage.winRate)
+                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: Int(gameStage.winRate))
                 isShowEnemy = true
                 isCamera = false
                 timer.upstream.connect().cancel()

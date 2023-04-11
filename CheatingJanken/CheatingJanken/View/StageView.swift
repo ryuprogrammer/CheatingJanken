@@ -8,50 +8,49 @@
 import SwiftUI
 
 struct StageView: View {
+    // 選択されたgameStageを格納
     @State private var gameStage: StageSituation? = nil
-    @ObservedObject var stageViewModel = StageViewModel()
+    let stageViewModel = StageViewModel()
+    // スクロールのoffsetを格納
+    @State private var offset = CGFloat.zero
     
     var body: some View {
-        VStack {
-            Text("ステージを選択")
-                .font(.largeTitle)
-                .bold()
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, maxHeight: 80)
-                .background(Color.customGround)
+        ZStack {
+            // 背景
+            BackgroundView(offset: $offset)
             
-            ScrollView {
-                VStack {
-                    ForEach(stageViewModel.stageSituations, id: \.self) { stage in
-                        Button {
-                            gameStage = stage
-                        } label: {
-                            HStack {
-                                Image(systemName: stage.situation ? "checkmark.shield.fill" : "checkmark.shield")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 30)
-                                    .aspectRatio(contentMode: .fill)
-                                Text("\(stage.stage)   \(stage.winRate) %")
-                                    .font(.title)
-                                    .foregroundColor(Color.white)
-                                Spacer()
+            VStack {
+                Text("ゲームメニュー")
+                    .padding()
+                    .bold()
+                    .font(.system(size: 40))
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.mint.opacity(0.5))
+                
+                ScrollView {
+                    VStack {
+                        ForEach(stageViewModel.stageSituations, id: \.self) { stageSituations in
+                            Button {
+                                gameStage = stageSituations
+                            } label: {
+                                CardView(stageSituation: stageSituations)
                             }
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.customGround)
                         }
+                        .cornerRadius(20)
                     }
-                    .cornerRadius(20)
-                    .padding(10)
+                    .background(GeometryReader { proxy -> Color in
+                        DispatchQueue.main.async {
+                            offset = -proxy.frame(in: .named("scroll")).origin.y
+                        }
+                        return Color.clear
+                    })
+                    .fullScreenCover(item: $gameStage, content: { gameStage in
+                        HandGestureView(gameStage: gameStage)
+                    })
                 }
-                .fullScreenCover(item: $gameStage, content: { gameStage in
-                    HandGestureView(gameStage: gameStage)
-                })
             }
         }
-        .background(Color.customBackground)
     }
 }
 

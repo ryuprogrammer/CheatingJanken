@@ -13,6 +13,9 @@
 		5A1F0EB429C6F780001E84B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB329C6F780001E84B4 /* Assets.xcassets */; };
 		5A1F0EB829C6F780001E84B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */; };
 		5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */; };
+		5AB9232C29E4FD63006094D0 /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9232B29E4FD63006094D0 /* CircularProgressBarView.swift */; };
+		5AB9232E29E4FDAC006094D0 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9232D29E4FDAC006094D0 /* BackgroundView.swift */; };
+		5AB9233029E4FDF1006094D0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9232F29E4FDF1006094D0 /* CardView.swift */; };
 		5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* HandGestureView.swift */; };
 		5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */; };
 		5ADF085029DFBD410052765D /* HandGestureDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084F29DFBD410052765D /* HandGestureDetector.swift */; };
@@ -32,6 +35,9 @@
 		5A1F0EB529C6F780001E84B4 /* CheatingJanken.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CheatingJanken.entitlements; sourceTree = "<group>"; };
 		5A1F0EB729C6F780001E84B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
+		5AB9232B29E4FD63006094D0 /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
+		5AB9232D29E4FDAC006094D0 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		5AB9232F29E4FDF1006094D0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5ADF084329DD4E8A0052765D /* HandGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureView.swift; sourceTree = "<group>"; };
 		5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureViewModel.swift; sourceTree = "<group>"; };
 		5ADF084F29DFBD410052765D /* HandGestureDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureDetector.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 			children = (
 				5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */,
 				5ADF084329DD4E8A0052765D /* HandGestureView.swift */,
+				5AB9232B29E4FD63006094D0 /* CircularProgressBarView.swift */,
+				5AB9232D29E4FDAC006094D0 /* BackgroundView.swift */,
+				5AB9232F29E4FDF1006094D0 /* CardView.swift */,
 				5ADF085329DFBE3D0052765D /* CameraView.swift */,
 			);
 			path = View;
@@ -197,12 +206,15 @@
 				5A1F0EBF29C6F7F0001E84B4 /* StageView.swift in Sources */,
 				5A1F0EAB29C6F77F001E84B4 /* CheatingJankenApp.swift in Sources */,
 				5ADF088C29E28A930052765D /* ColorExtension.swift in Sources */,
+				5AB9233029E4FDF1006094D0 /* CardView.swift in Sources */,
 				5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */,
 				5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,
 				5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */,
 				5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */,
 				5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */,
+				5AB9232E29E4FDAC006094D0 /* BackgroundView.swift in Sources */,
+				5AB9232C29E4FD63006094D0 /* CircularProgressBarView.swift in Sources */,
 				5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */,
 				5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */,
 			);

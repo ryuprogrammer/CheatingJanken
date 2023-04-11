@@ -9,7 +9,6 @@ import Foundation
 
 struct StageSituation: Identifiable, Hashable {
     let id: UUID = UUID()
-    let stage: String
-    let situation: Bool
-    let winRate: Int
+    let imageName: String
+    let winRate: CGFloat
 }
