@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HandGestureView: View {
+    // 環境変数を利用して画面を戻る
+    @Environment(\.dismiss) var dissmiss
     // HandGestureViewModelのインスタンス生成
     @ObservedObject private var camera = HandGestureViewModel()
     // Viewの背景色のプロパティ
@@ -22,8 +24,20 @@ struct HandGestureView: View {
     @State private var jankenText: String = ""
     // 敵のジャンケン結果の表示有無
     @State private var isShowEnemy: Bool = false
-    
+    // StageViewから選択されたStageSituationを格納
     @State var gameStage: StageSituation
+    // 敵のHPを格納
+    @State var enemyHealthPoint: Double = 1000
+    // ユーザーのHPを格納
+    @State var userHealthPoint: Double = 1000
+    // 敵のHPの背景色を格納
+    @State var enemyHealthColor: [Color] = [.mint, .blue, .blue]
+    // ユーザーのHPの背景色を格納
+    @State var userHealthColor: [Color] = [.mint, .blue, .blue]
+    // ゲームの勝敗を格納
+    @State var finalResult: String? = nil
+    // ResultViewの表示有無
+    @State var isShowResultView: Bool = false
     
     var body: some View {
         ZStack {
@@ -39,8 +53,23 @@ struct HandGestureView: View {
             }
             
             VStack {
-                Spacer()
-                    .frame(height: 100)
+                HStack {
+                    Button {
+                        dissmiss()
+                    } label: {
+                        Text("もどる")
+                            .bold()
+                            .font(.system(size: 30))
+                            .foregroundColor(Color.white)
+                            .padding()
+                            .frame(width: 120, height: 40)
+                            .background(Color.white.opacity(0.3))
+                            .cornerRadius(20)
+                    }
+                    
+                    Spacer()
+                        .frame(width: 220)
+                }
                 
                 Text("勝率：\(Int(gameStage.winRate*100)) %")
                     .bold()
@@ -52,7 +81,7 @@ struct HandGestureView: View {
                         // キャラクターのジャンケン結果を表示
                         Text("\(camera.handGestureModel.enemyHandGesture.rawValue)")
                             .bold()
-                            .font(.system(size: 100))
+                            .font(.system(size: 50))
                             .foregroundColor(Color.white)
                             .rotationEffect(Angle(degrees: -30))
                     }
@@ -63,6 +92,10 @@ struct HandGestureView: View {
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                 }
+                
+                // 敵のHPを表示
+                HealthPointView(healthPoint: $enemyHealthPoint,
+                                healthColor: $enemyHealthColor)
                 
                 if isShowEnemy {
                     // ジャンケン結果を表示
@@ -90,8 +123,9 @@ struct HandGestureView: View {
                     .font(.system(size: 30))
                     .foregroundColor(Color.white)
                 
-                Spacer()
-                    .frame(height: 100)
+                // ユーザーのHPを表示
+                HealthPointView(healthPoint: $userHealthPoint,
+                                healthColor: $userHealthColor)
                 
                 // カメラのオンオフの切り替え
                 Button {
@@ -115,20 +149,42 @@ struct HandGestureView: View {
                         .cornerRadius(20)
                 }
             }
+            .fullScreenCover(isPresented: $isShowResultView, onDismiss: {
+                dissmiss()
+            }) {
+                ResultView(finalResult: $finalResult, gameStage: $gameStage)
+            }
         }
         // timerを監視して
         .onReceive(timer) { _ in
             jankenCount += 1
-            if jankenCount >= 20 {
+            if jankenCount >= 11 {
                 camera.stop()
                 // ジャンケンの結果を出力
-                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: Int(gameStage.winRate))
+                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(
+                    rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: Int(gameStage.winRate))
+                withAnimation {
+                    enemyHealthPoint = camera.handGestureModel.enemyHealthPoint
+                    userHealthPoint = camera.handGestureModel.userHealthPoint
+                    enemyHealthColor = camera.handGestureModel.enemyHealthColor
+                    userHealthColor = camera.handGestureModel.userHealthColor
+                }
+                print(enemyHealthPoint)
+                print(camera.handGestureModel.enemyHealthPoint)
+                
+                // ゲーム終了を判定
+                finalResult = camera.handGestureModel.judgeWinner(enemyHealthPoint: enemyHealthPoint, userHealthPoint: userHealthPoint)
+                
+                if finalResult != nil {
+                    isShowResultView = true
+                }
+                
                 isShowEnemy = true
                 isCamera = false
                 timer.upstream.connect().cancel()
             }
         }
-        // currentGestureに応じて背景色を変化させる
+        // currentGestureが適切に判定されているか確認
         .onChange(of: camera.handGestureDetector.currentGesture.rawValue) { currentGesture in
             withAnimation {
                 backgroundColor = (currentGesture == "？？？" ? .red : .mint)
@@ -137,14 +193,11 @@ struct HandGestureView: View {
         .onChange(of: jankenCount) { jankenCount in
             // カウント毎にテキストを変更する
             switch jankenCount {
-            case 0,4,8: jankenText = "Ready.   "
-            case 1,5,9: jankenText = "Ready..  "
-            case 2,6,10: jankenText = "Ready... "
-            case 3,7,11: jankenText = "Ready...?"
-            case 12,13: jankenText = "最初は、、"
-            case 14,15: jankenText = "ぐー！"
-            case 16,17: jankenText = "じゃんけん"
-            case 18,19,20: jankenText = "ぽん！！！"
+            case 0,1,2: jankenText = "Ready.   "
+            case 3,4: jankenText = "最初は、、"
+            case 5,6: jankenText = "ぐー！"
+            case 7,8: jankenText = "じゃんけん"
+            case 9,10,11: jankenText = "ぽん！！！"
             default: break
             }
         }

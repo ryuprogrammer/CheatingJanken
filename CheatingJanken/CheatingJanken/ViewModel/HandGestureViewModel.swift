@@ -17,7 +17,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     let handGestureDetector: HandGestureDetector
     private let session = AVCaptureSession()
     private var delegate: HandGestureDetectorDelegate?
-    let handGestureModel = HandGestureModel()
+    var handGestureModel = HandGestureModel()
     
     @Published var currentGesture: HandGestureDetector.HandGesture = .unknown
     
