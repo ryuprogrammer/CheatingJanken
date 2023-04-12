@@ -23,22 +23,22 @@ class HandGestureDetector: ObservableObject {
         case scissors = "✌"
         case unknown = "？？？"
     }
-    
+
     // デリゲートメソッドに渡す用のHandGestureプロパティ
     var currentGesture: HandGesture = .unknown {
         didSet {
             delegate?.handGestureDetector(self, didRecognize: currentGesture)
         }
     }
-    
+
     // デリゲートを持たせるためのプロパティ
     weak var delegate: HandGestureDetectorDelegate?
-    
+
     // デリゲートを初期化
     init(delegate: HandGestureDetectorDelegate? = nil) {
         self.delegate = delegate
     }
-    
+
     func createDetectionRequest(pixelBuffer: CVPixelBuffer) throws -> VNImageBasedRequest {
         // 人間の手を検出するリクエストクラスのインスタンス生成
         let request = VNDetectHumanHandPoseRequest()
@@ -48,13 +48,13 @@ class HandGestureDetector: ObservableObject {
         try VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
         return request
     }
-    
+
     // HandPoseを判別するメソッド
     func processObservations(_ observations: [VNRecognizedPointsObservation]) {
         guard let points = try? observations.first?.recognizedPoints(forGroupKey: .all) else {
             return
         }
-        
+
         // 指先
         let indexTip = points[VNHumanHandPoseObservation.JointName.indexTip.rawValue]?.location ?? .zero
         let middleTip = points[VNHumanHandPoseObservation.JointName.middleTip.rawValue]?.location ?? .zero
@@ -67,19 +67,19 @@ class HandGestureDetector: ObservableObject {
         let littlePIP = points[VNHumanHandPoseObservation.JointName.littlePIP.rawValue]?.location ?? .zero
         // 手首
         let wrist = points[VNHumanHandPoseObservation.JointName.wrist.rawValue]?.location ?? .zero
-        
+
         // 手首から指先の長さ
         let wristToIndexTip = distance(from: wrist, to: indexTip)
         let wristToMiddleTip = distance(from: wrist, to: middleTip)
         let wristToRingTip = distance(from: wrist, to: ringTip)
         let wristToLittleTip = distance(from: wrist, to: littleTip)
-        
+
         // 手首から近位指節間(PIP)関節の長さ
         let wristToIndexPIP = distance(from: wrist, to: indexPIP)
         let wristToMiddlePIP = distance(from: wrist, to: middlePIP)
         let wristToRingPIP = distance(from: wrist, to: ringPIP)
         let wristToLittlePIP = distance(from: wrist, to: littlePIP)
-        
+
         // 人差し指が曲がっているかチェック
         if wristToIndexTip > wristToIndexPIP {
             print("人差し指：まっすぐ")
@@ -104,7 +104,7 @@ class HandGestureDetector: ObservableObject {
         } else if wristToLittleTip < wristToLittlePIP {
             print("小指：曲がってる")
         }
-        
+
         // HandPoseの判定(どの指が曲がっているかでグーチョキパーを判定する）
         if
             wristToIndexTip > wristToIndexPIP &&
@@ -130,14 +130,14 @@ class HandGestureDetector: ObservableObject {
         } else {
             currentGesture = .unknown
         }
-        
+
         print(currentGesture.rawValue)
         print("--------------")
-        
+
         // デリゲートを呼び出す
         delegate?.handGestureDetector(self, didRecognize: currentGesture) // delegate 経由で currentGesture を通知する
     }
-    
+
     // 画面上の２点間の距離を三平方の定理より求める
     private func distance(from: CGPoint, to: CGPoint) -> CGFloat {
         return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))

@@ -9,16 +9,16 @@ import SwiftUI
 
 struct StageView: View {
     // 選択されたgameStageを格納
-    @State private var gameStage: StageSituation? = nil
+    @State private var gameStage: StageSituation?
     let stageViewModel = StageViewModel()
     // スクロールのoffsetを格納
     @State private var offset = CGFloat.zero
-    
+
     var body: some View {
         ZStack {
             // 背景
             BackgroundView(offset: $offset)
-            
+
             VStack {
                 Text("ゲームメニュー")
                     .padding()
@@ -27,7 +27,7 @@ struct StageView: View {
                     .foregroundColor(Color.white)
                     .frame(maxWidth: .infinity)
                     .background(Color.mint.opacity(0.5))
-                
+
                 ScrollView {
                     VStack {
                         ForEach(stageViewModel.stageSituations, id: \.self) { stageSituations in

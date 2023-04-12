@@ -17,22 +17,16 @@ struct HealthPointView: View {
                                      startPoint: .topLeading,
                                      endPoint: .bottomTrailing))
                 .frame(width: 300, height: 23)
-                .shadow(color: Color.white.opacity(0.5),radius: 20)
+                .shadow(color: Color.white.opacity(0.5), radius: 20)
             VStack {
                 Capsule()
                     .fill(LinearGradient(gradient: Gradient(colors: healthColor),
                                          startPoint: .topLeading,
                                          endPoint: .bottomTrailing))
                     .frame(width: 300*CGFloat(healthPoint/1000), height: 23)
-                    .shadow(color: Color.white.opacity(0.2),radius: 3)
+                    .shadow(color: Color.white.opacity(0.2), radius: 3)
                     .padding(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: 300*(1-CGFloat(healthPoint/1000))))
             }
         }
     }
 }
-
-//struct HealthPointView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HealthPointView(healthPoint: 1000)
-//    }
-//}

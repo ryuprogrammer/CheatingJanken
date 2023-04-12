@@ -1,0 +1,3 @@
+disabled_rules:
+- multiple_closures_with_trailing_closure # Trailing Closureを許可するため除外
+- unused_optional_binding # 未使用のオプショナルバインディングでlet _ =を使う

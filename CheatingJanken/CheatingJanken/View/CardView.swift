@@ -16,7 +16,7 @@ struct CardView: View {
                 .frame(width: 400, height: 200)
                 .foregroundColor(.white.opacity(0.2))
                 .cornerRadius(20)
-            
+
             HStack {
                 VStack {
                     // キャラクターを配置
@@ -24,12 +24,12 @@ struct CardView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 140, height: 140)
-                        .cornerRadius(20)
+                        .shadow(color: .black.opacity(0.4), radius: 10, x: 10, y: 10)
                 }
-                
+
                 Spacer()
                     .frame(width: 70)
-                
+
                 // プログレスバー
                 CircularProgressBarView(progress: stageSituation.winRate)
                     .frame(width: 100, height: 100)

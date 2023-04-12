@@ -15,10 +15,10 @@ struct CircularProgressBarView: View {
         ZStack {
             // 背景の円
             Circle()
-            // 円形の線描写するように指定
+                // 円形の線描写するように指定
                 .stroke(lineWidth: 12)
                 .foregroundColor(.mint.opacity(0.15))
-            
+
             // 進捗を示す円
             Circle()
                 .trim(from: 0.0, to: min(isProgress ? progress : 0, 1.0))
@@ -28,14 +28,14 @@ struct CircularProgressBarView: View {
                                      startPoint: .top,
                                      endPoint: .bottom))
                 .rotationEffect(Angle(degrees: 270))
-            
+
             VStack {
-                Text("勝率")
+                Text("難易度")
                     .font(.system(size: 20))
                 // 進捗率のテキスト
                 AnimationReader(percentage) {value in
-                    Text("\(value) %")
-                        .font(.system(size: 30))
+                    Text("\(value)%")
+                        .font(.system(size: 35))
                         .bold()
                 }
             }
@@ -57,35 +57,35 @@ struct CircularProgressBarView_Previews: PreviewProvider {
     }
 }
 
-fileprivate struct AnimationReaderModifier<Body: View>: AnimatableModifier {
+private struct AnimationReaderModifier<Body: View>: AnimatableModifier {
     let content: (CGFloat) -> Body
     var animatableData: CGFloat
-    
+
     init(value: CGFloat, @ViewBuilder content: @escaping (CGFloat) -> Body) {
         self.animatableData = value
         self.content = content
     }
-    
+
     func body(content: Content) -> Body {
         self.content(animatableData)
     }
 }
 
 struct AnimationReader<Content: View>: View {
-    
+
     let value: CGFloat
     let content: (_ animatingValue: CGFloat) -> Content
-    
+
     init(_ observedValue: Int, @ViewBuilder content: @escaping (_ animatingValue: Int) -> Content) {
         self.value = CGFloat(observedValue)
         self.content = { value in content(Int(value)) }
     }
-    
+
     init(_ observedValue: CGFloat, @ViewBuilder content: @escaping (_ animatingValue: CGFloat) -> Content) {
         self.value = observedValue
         self.content = content
     }
-    
+
     var body: some View {
         EmptyView()
             .modifier(AnimationReaderModifier(value: value, content: content))

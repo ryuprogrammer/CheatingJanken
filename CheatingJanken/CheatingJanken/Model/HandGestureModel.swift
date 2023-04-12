@@ -16,7 +16,7 @@ class HandGestureModel {
         case lose = "負け。。"
         case aiko = "あいこ"
     }
-    
+
     // 敵のジャンケン結果を格納するプロパティ
     var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
     // ジャンケンの結果を格納するプロパティ
@@ -31,7 +31,7 @@ class HandGestureModel {
     var userHealthColor: [Color] = [.mint, .blue, .blue]
     // ダメージ
     let damage: Double = 300
-    
+
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(userHandGesture: HandGestureDetector.HandGesture, winRate: Int) {
         let random = Int.random(in: 1...100)
@@ -77,7 +77,7 @@ class HandGestureModel {
             }
         }
     }
-    
+
     // HPを計算
     func hitPoint(damage: Double, healthPoint: Double) -> Double {
         var newHealthPoint: Double = 1000
@@ -88,11 +88,11 @@ class HandGestureModel {
         }
         return newHealthPoint
     }
-    
+
     // HPの背景色を決定（青→黄色→赤）
     func determineHealthPointColor(healthPoint: Double) -> [Color] {
         var healthColor: [Color] = []
-        
+
         if healthPoint > 500 {
             healthColor = [.mint, .blue, .blue]
         } else if healthPoint > 150 {
@@ -102,7 +102,7 @@ class HandGestureModel {
         }
         return healthColor
     }
-    
+
     // ゲームが終了したら勝敗を判定
     func judgeWinner(enemyHealthPoint: Double, userHealthPoint: Double) -> String? {
         // どちらかのHPが0になった時点で終了

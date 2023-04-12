@@ -17,13 +17,13 @@ struct BackgroundView: View {
                 .blur(radius: 50)
                 .frame(width: 900)
                 .position(CGPoint(x: 400, y: 800-offset*0.5))
-            
+
             Circle()
                 .foregroundColor(Color.blue.opacity(0.5))
                 .blur(radius: 50)
                 .frame(width: 500 - offset*0.3)
                 .position(CGPoint(x: 0, y: 500+offset*0.5))
-            
+
             Circle()
                 .foregroundColor(Color.red.opacity(0.5))
                 .blur(radius: 50)
