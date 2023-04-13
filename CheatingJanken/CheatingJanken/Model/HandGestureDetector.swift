@@ -39,7 +39,7 @@ class HandGestureDetector: ObservableObject {
         self.delegate = delegate
     }
 
-// MARK: - メソッド
+    // MARK: - メソッド
     func createDetectionRequest(pixelBuffer: CVPixelBuffer) throws -> VNImageBasedRequest {
         // 人間の手を検出するリクエストクラスのインスタンス生成
         let request = VNDetectHumanHandPoseRequest()

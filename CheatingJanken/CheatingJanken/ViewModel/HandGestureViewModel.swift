@@ -48,7 +48,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         }
     }
 
-// MARK: - メソッド
+    // MARK: - メソッド
     // キャプチャを停止するメソッド
     func stop() {
         session.stopRunning()
