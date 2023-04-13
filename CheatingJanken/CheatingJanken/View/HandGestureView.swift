@@ -8,36 +8,42 @@
 import SwiftUI
 
 struct HandGestureView: View {
-    // 環境変数を利用して画面を戻る
-    @Environment(\.dismiss) var dissmiss
+// MARK: - インスタンス生成
     // HandGestureViewModelのインスタンス生成
     @ObservedObject private var camera = HandGestureViewModel()
     // JankenTextViewModelのインスタンス生成
     let jankenTextViewModel = JankenTextViewModel()
-    // Viewの背景色のプロパティ
-    @State private var backgroundColor = Color.red
-    // カメラのオンオフを切り替えるプロパティ
-    @State private var isCamera = false
+// MARK: - ゲーム関連
     // ジャンケンのカウントダウン用プロパティ
     @State private var jankenCount: Int = 0
     // ジャンケンの掛け声
     @State private var jankenText: String = ""
-    // 敵のジャンケン結果の表示有無
-    @State private var isShowEnemy: Bool = false
-    // StageViewから選択されたStageSituationを格納
-    @State var gameStage: StageSituation
-    // 敵のHPを格納
-    @State var enemyHealthPoint: Double = 1000
-    // ユーザーのHPを格納
-    @State var userHealthPoint: Double = 1000
-    // 敵のHPの背景色を格納
-    @State var enemyHealthColor: [Color] = [.mint, .blue, .blue]
-    // ユーザーのHPの背景色を格納
-    @State var userHealthColor: [Color] = [.mint, .blue, .blue]
     // ゲームの勝敗を格納
     @State var finalResult: String?
+// MARK: - 敵キャラの情報関連
+    // 敵のHPを格納
+    @State var enemyHealthPoint: Double = 1000
+    // 敵のHPの背景色を格納
+    @State var enemyHealthColor: [Color] = [.mint, .blue, .blue]
+    // 敵のジャンケン結果の表示有無
+    @State private var isShowEnemy: Bool = false
+// MARK: - ユーザーの情報関連
+    // ユーザーのHPを格納
+    @State var userHealthPoint: Double = 1000
+    // ユーザーのHPの背景色を格納
+    @State var userHealthColor: [Color] = [.mint, .blue, .blue]
+// MARK: - 画面遷移
+    // 環境変数を利用して画面を戻る
+    @Environment(\.dismiss) var dissmiss
+    // StageViewから選択されたStageSituationを格納
+    @State var gameStage: StageSituation
     // ResultViewの表示有無
     @State var isShowResultView: Bool = false
+// MARK: - カメラ
+    // カメラのオンオフを切り替えるプロパティ
+    @State private var isCamera = false
+    // Viewの背景色のプロパティ（ジャンケンの手が有効の時青、無効の時赤に変化）
+    @State private var backgroundColor = Color.red
 
     var body: some View {
         ZStack {
