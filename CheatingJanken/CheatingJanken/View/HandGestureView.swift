@@ -20,8 +20,6 @@ struct HandGestureView: View {
     @State private var isCamera = false
     // ジャンケンのカウントダウン用プロパティ
     @State private var jankenCount: Int = 0
-    // 決められた時間毎にイベントを発行
-    @State private var timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     // ジャンケンの掛け声
     @State private var jankenText: String = ""
     // 敵のジャンケン結果の表示有無
@@ -142,7 +140,6 @@ struct HandGestureView: View {
                     } else {
                         isShowEnemy = false
                         jankenCount = 0
-                        timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
                         camera.start()
                     }
                     isCamera.toggle()
@@ -163,8 +160,7 @@ struct HandGestureView: View {
                 ResultView(finalResult: $finalResult, gameStage: $gameStage)
             }
         }
-        // timerを監視して
-        .onReceive(timer) { _ in
+        .onReceive(camera.jankenCallTimer, perform: { _ in
             jankenCount += 1
             let jankenFinishTime: Int = 7
             if jankenCount >= jankenFinishTime {
@@ -189,10 +185,8 @@ struct HandGestureView: View {
 
                 isShowEnemy = true
                 isCamera = false
-                // タイマーを止める
-                timer.upstream.connect().cancel()
             }
-        }
+        })
         // currentGestureが適切に判定されているか確認
         .onChange(of: camera.handGestureDetector.currentGesture.rawValue) { currentGesture in
             withAnimation {
