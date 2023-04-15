@@ -34,8 +34,8 @@ struct CircularProgressBarView: View {
                     .font(.system(size: 20))
                 // 進捗率のテキスト
                 AnimationReader(percentage) {value in
-                    Text("\(value)%")
-                        .font(.system(size: 35))
+                    Text("\(value)")
+                        .font(.system(size: 45))
                         .bold()
                 }
             }

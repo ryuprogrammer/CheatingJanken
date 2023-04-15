@@ -31,7 +31,7 @@ struct CardView: View {
                     .frame(width: 70)
 
                 // プログレスバー
-                CircularProgressBarView(progress: stageSituation.winRate)
+                CircularProgressBarView(progress: CGFloat(stageSituation.level)*14.28/100)
                     .frame(width: 100, height: 100)
             }
         }
@@ -40,6 +40,6 @@ struct CardView: View {
 
 struct SelectCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(stageSituation: StageSituation(imageName: "001", winRate: 0.8))
+        CardView(stageSituation: StageSituation(imageName: "007", level: 7, winRate: 30, userReversalWin: nil, userReversalLose: 0.2))
     }
 }

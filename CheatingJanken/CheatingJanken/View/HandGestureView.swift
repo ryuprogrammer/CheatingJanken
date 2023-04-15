@@ -20,6 +20,8 @@ struct HandGestureView: View {
     @State private var jankenText: String = ""
     // ゲームの勝敗を格納
     @State var finalResult: String?
+    // 勝率を格納
+    @State var showWinRate: Int?
     // MARK: - 敵キャラの情報関連
     // 敵のHPを格納
     @State var enemyHealthPoint: Double = 1000
@@ -77,7 +79,8 @@ struct HandGestureView: View {
                         .frame(width: 220)
                 }
 
-                Text("勝率：\(Int(gameStage.winRate*100)) %")
+                // 勝率を表示
+                Text("勝率：\(camera.handGestureModel.newWinRate ?? gameStage.winRate) %")
                     .bold()
                     .font(.system(size: 30))
                     .foregroundColor(Color.white)
@@ -173,7 +176,7 @@ struct HandGestureView: View {
                 camera.stop()
                 // ジャンケンの結果を出力
                 camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(
-                                                        rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, winRate: Int(gameStage.winRate))
+                                                        rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, stageSituation: gameStage)
                 // HPをアニメーションで変化させる
                 withAnimation {
                     enemyHealthPoint = camera.handGestureModel.enemyHealthPoint
@@ -188,6 +191,8 @@ struct HandGestureView: View {
                 if let _ = finalResult {
                     isShowResultView = true
                 }
+
+                print(camera.handGestureModel.newWinRate ?? gameStage.winRate)
 
                 isShowEnemy = true
                 isCamera = false

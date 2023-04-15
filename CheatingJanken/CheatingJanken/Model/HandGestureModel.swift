@@ -30,12 +30,29 @@ class HandGestureModel {
     // ユーザーのHPの背景色
     var userHealthColor: [Color] = [.mint, .blue, .blue]
     // ダメージ
-    let damage: Double = 300
+    let damage: Double = 180
+    var newWinRate: Int?
 
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-    func JankenResult(userHandGesture: HandGestureDetector.HandGesture, winRate: Int) {
+    func JankenResult(userHandGesture: HandGestureDetector.HandGesture,
+                      stageSituation: StageSituation) {
+        // 逆転勝利の有無によってwinRateを増加
+        if let userReversalWin = stageSituation.userReversalWin {
+            if userHealthPoint <= 1000*userReversalWin {
+                // 勝率が90%を超えないようにminを使用
+                newWinRate = min(stageSituation.winRate + 30, 90)
+            }
+        }
+        // 逆転負けの有無によってwinRateを減少
+        if let userReversalLose = stageSituation.userReversalLose {
+            if enemyHealthPoint <= 1000*userReversalLose {
+                // 勝率が10%を下回らないようにmaxを使用
+                newWinRate = max(stageSituation.winRate - 30, 10)
+            }
+        }
+
         let random = Int.random(in: 1...100)
-        if random <= winRate { // プレーヤーの勝ち
+        if random <= newWinRate ?? stageSituation.winRate { // プレーヤーの勝ち
             result = .win
             // 敵のHPを減らす
             enemyHealthPoint = hitPoint(damage: damage, healthPoint: enemyHealthPoint)
@@ -47,7 +64,7 @@ class HandGestureModel {
             case .paper: enemyHandGesture = .rock
             default: break
             }
-        } else if random <= (100-winRate)/2 { // プレーヤーの負け
+        } else if random <= 80 { // プレーヤーの負け
             result = .lose
             // ユーザーのHPを減らす
             userHealthPoint = hitPoint(damage: damage, healthPoint: userHealthPoint)
