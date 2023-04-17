@@ -31,6 +31,7 @@ class HandGestureModel {
     var userHealthColor: [Color] = [.mint, .blue, .blue]
     // ダメージ
     let damage: Double = 180
+    // 逆転後の勝率
     var newWinRate: Int?
 
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
@@ -52,7 +53,11 @@ class HandGestureModel {
         }
 
         let random = Int.random(in: 1...100)
-        if random <= newWinRate ?? stageSituation.winRate { // プレーヤーの勝ち
+        // プレーヤーが勝つ閾値
+        let userWinNumber = newWinRate ?? stageSituation.winRate
+        // プレーヤーが負ける閾値
+        let userLoseNumber = 75 + userWinNumber/4
+        if random <= userWinNumber { // プレーヤーの勝ち
             result = .win
             // 敵のHPを減らす
             enemyHealthPoint = hitPoint(damage: damage, healthPoint: enemyHealthPoint)
@@ -64,7 +69,7 @@ class HandGestureModel {
             case .paper: enemyHandGesture = .rock
             default: break
             }
-        } else if random <= 80 { // プレーヤーの負け
+        } else if random <= userLoseNumber { // プレーヤーの負け
             result = .lose
             // ユーザーのHPを減らす
             userHealthPoint = hitPoint(damage: damage, healthPoint: userHealthPoint)
@@ -96,7 +101,7 @@ class HandGestureModel {
     }
 
     // HPを計算
-    func hitPoint(damage: Double, healthPoint: Double) -> Double {
+    private func hitPoint(damage: Double, healthPoint: Double) -> Double {
         var newHealthPoint: Double = 1000
         if healthPoint-(damage) > 0 {
             newHealthPoint = healthPoint-(damage)
@@ -106,13 +111,15 @@ class HandGestureModel {
         return newHealthPoint
     }
 
-    // HPの背景色を決定（青→黄色→赤）
-    func determineHealthPointColor(healthPoint: Double) -> [Color] {
+    // HPの背景色を決定（青→黄色→赤)
+    private func determineHealthPointColor(healthPoint: Double) -> [Color] {
         var healthColor: [Color] = []
+        let highHealthPoint: Double = 500
+        let normalHealthPoint: Double = 150
 
-        if healthPoint > 500 {
+        if healthPoint > highHealthPoint {
             healthColor = [.mint, .blue, .blue]
-        } else if healthPoint > 150 {
+        } else if healthPoint > normalHealthPoint {
             healthColor = [.yellow, .yellow, .orange]
         } else {
             healthColor = [.orange, .red, .red]
@@ -122,14 +129,16 @@ class HandGestureModel {
 
     // ゲームが終了したら勝敗を判定
     func judgeWinner(enemyHealthPoint: Double, userHealthPoint: Double) -> String? {
-        // どちらかのHPが0になった時点で終了
-        if enemyHealthPoint == 0 || userHealthPoint == 0 {
-            if userHealthPoint > 0 {
-                return "あなたのかち！"
-            } else if enemyHealthPoint > 0 {
-                return "あなたの負け。"
+        let deathHealthPoint: Double = 0
+        // どちらかのHPがdeathHealthPointになった時点で終了
+        if enemyHealthPoint == deathHealthPoint || userHealthPoint == deathHealthPoint {
+            if userHealthPoint > deathHealthPoint {
+                return GameResult.win.rawValue
+            } else if enemyHealthPoint > deathHealthPoint {
+                return GameResult.lose.rawValue
             } else {
-                return "引き分け"
+                // ずっとあいこの場合
+                return GameResult.aiko.rawValue
             }
         }
         return nil

@@ -10,7 +10,7 @@ import SwiftUI
 struct CircularProgressBarView: View {
     @State var progress: CGFloat
     @State var percentage: Int = 0
-    @State var isProgress: Bool = false
+    @State private var isProgress: Bool = false
     var body: some View {
         ZStack {
             // 背景の円
@@ -58,8 +58,8 @@ struct CircularProgressBarView_Previews: PreviewProvider {
 }
 
 private struct AnimationReaderModifier<Body: View>: AnimatableModifier {
-    let content: (CGFloat) -> Body
-    var animatableData: CGFloat
+    private let content: (CGFloat) -> Body
+    fileprivate var animatableData: CGFloat
 
     init(value: CGFloat, @ViewBuilder content: @escaping (CGFloat) -> Body) {
         self.animatableData = value
@@ -73,8 +73,8 @@ private struct AnimationReaderModifier<Body: View>: AnimatableModifier {
 
 struct AnimationReader<Content: View>: View {
 
-    let value: CGFloat
-    let content: (_ animatingValue: CGFloat) -> Content
+    private let value: CGFloat
+    private let content: (_ animatingValue: CGFloat) -> Content
 
     init(_ observedValue: Int, @ViewBuilder content: @escaping (_ animatingValue: Int) -> Content) {
         self.value = CGFloat(observedValue)

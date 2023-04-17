@@ -10,7 +10,8 @@ import SwiftUI
 struct StageView: View {
     // 選択されたgameStageを格納
     @State private var gameStage: StageSituation?
-    let stageViewModel = StageViewModel()
+    // StageViewModelのインスタンス生成
+    private let stageViewModel = StageViewModel()
     // スクロールのoffsetを格納
     @State private var offset = CGFloat.zero
 

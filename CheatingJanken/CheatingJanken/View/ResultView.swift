@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ResultView: View {
     // 環境変数を利用して画面を戻る
-    @Environment(\.dismiss) var dissmiss
+    @Environment(\.dismiss) private var dissmiss
     @Binding var finalResult: String?
     @Binding var gameStage: StageSituation
     @State private var offset = CGFloat.zero
     // アニメーション
-    @State var isAnimate: Bool = false
+    @State private var isAnimate: Bool = false
     var body: some View {
         ZStack {
+            // 背景View
             BackgroundView(offset: $offset)
 
             VStack {
@@ -76,9 +77,3 @@ struct ResultView: View {
         }
     }
 }
-
-//    struct ResultView_Previews: PreviewProvider {
-//        static var previews: some View {
-//            ResultView()
-//        }
-//    }

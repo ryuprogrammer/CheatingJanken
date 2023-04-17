@@ -115,19 +115,17 @@ class HandGestureDetector: ObservableObject {
             // ４本の指が曲がっていないのでぱー
             currentGesture = .paper
         } else if
-            wristToIndexTip > wristToIndexPIP &&
-                wristToMiddleTip > wristToMiddlePIP &&
-                wristToRingTip < wristToRingPIP &&
-                wristToLittleTip < wristToLittlePIP {
-            // IndexとMiddleが曲がっていないのでちょき
-            currentGesture = .scissors
-        } else if
             wristToIndexTip < wristToIndexPIP &&
                 wristToMiddleTip < wristToMiddlePIP &&
                 wristToRingTip < wristToRingPIP &&
                 wristToLittleTip < wristToLittlePIP {
             // ４本の指が曲がっているのでぐー
             currentGesture = .rock
+        } else if
+            wristToIndexTip > wristToIndexPIP &&
+                wristToMiddleTip > wristToMiddlePIP {
+            // IndexとMiddleが曲がっていないのでちょき
+            currentGesture = .scissors
         } else {
             currentGesture = .unknown
         }
@@ -135,8 +133,8 @@ class HandGestureDetector: ObservableObject {
         print(currentGesture.rawValue)
         print("--------------")
 
-        // デリゲートを呼び出す
-        delegate?.handGestureDetector(self, didRecognize: currentGesture) // delegate 経由で currentGesture を通知する
+        // delegate 経由で currentGesture を通知する
+        delegate?.handGestureDetector(self, didRecognize: currentGesture)
     }
 
     // 画面上の２点間の距離を三平方の定理より求める
