@@ -7,8 +7,8 @@
 
 import Foundation
 
-class StageModel: ObservableObject {
-    @Published var stageSituations: [StageSituation] = [
+struct StageModel {
+    let stageSituations: [StageSituation] = [
         StageSituation(imageName: "001", level: 1, winRate: 90, userReversalWin: nil, userReversalLose: nil),
         StageSituation(imageName: "002", level: 2, winRate: 60, userReversalWin: nil, userReversalLose: nil),
         StageSituation(imageName: "003", level: 3, winRate: 50, userReversalWin: 0.6, userReversalLose: nil),
