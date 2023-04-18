@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct StageView: View {
+    // StageViewModelのインスタンス生成
+    @StateObject var stageViewModel = StageViewModel()
     // 選択されたgameStageを格納
     @State private var gameStage: StageSituation?
-    // StageViewModelのインスタンス生成
-    private let stageViewModel = StageViewModel()
     // スクロールのoffsetを格納
     @State private var offset = CGFloat.zero
-
     var body: some View {
         ZStack {
             // 背景
@@ -31,14 +30,13 @@ struct StageView: View {
 
                 ScrollView {
                     VStack {
-                        ForEach(stageViewModel.stageSituations, id: \.self) { stageSituations in
+                        ForEach(stageViewModel.stageSituations, id: \.self) { stageSituation in
                             Button {
-                                gameStage = stageSituations
+                                gameStage = stageSituation
                             } label: {
-                                CardView(stageSituation: stageSituations)
+                                CardView(stageSituation: stageSituation)
                             }
                         }
-                        .cornerRadius(20)
                     }
                     .background(GeometryReader { proxy -> Color in
                         DispatchQueue.main.async {
@@ -46,9 +44,9 @@ struct StageView: View {
                         }
                         return Color.clear
                     })
-                    .fullScreenCover(item: $gameStage, content: { gameStage in
+                    .fullScreenCover(item: $gameStage) { gameStage in
                         HandGestureView(gameStage: gameStage)
-                    })
+                    }
                 }
             }
         }

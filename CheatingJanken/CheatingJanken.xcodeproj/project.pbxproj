@@ -26,6 +26,7 @@
 		5ADF085429DFBE3D0052765D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085329DFBE3D0052765D /* CameraView.swift */; };
 		5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085529E00B2C0052765D /* StageSituation.swift */; };
 		5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085929E020DE0052765D /* StageViewModel.swift */; };
+		5AFCD02A29EE301500BA7A86 /* StageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFCD02929EE301500BA7A86 /* StageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		5ADF085329DFBE3D0052765D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		5ADF085529E00B2C0052765D /* StageSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSituation.swift; sourceTree = "<group>"; };
 		5ADF085929E020DE0052765D /* StageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
+		5AFCD02929EE301500BA7A86 /* StageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +133,10 @@
 		5A1F0EC429C6F891001E84B4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5AFCD02929EE301500BA7A86 /* StageModel.swift */,
+				5ADF085529E00B2C0052765D /* StageSituation.swift */,
 				5ADF085129DFBDE90052765D /* HandGestureModel.swift */,
 				5ADF084F29DFBD410052765D /* HandGestureDetector.swift */,
-				5ADF085529E00B2C0052765D /* StageSituation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				5A1F0EAD29C6F77F001E84B4 /* Persistence.swift in Sources */,
 				5A1F0EB029C6F77F001E84B4 /* CheatingJanken.xcdatamodeld in Sources */,
 				5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */,
+				5AFCD02A29EE301500BA7A86 /* StageModel.swift in Sources */,
 				5ADF085229DFBDE90052765D /* HandGestureModel.swift in Sources */,
 				5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */,
 				5AB9233229E56700006094D0 /* HealthPointView.swift in Sources */,
