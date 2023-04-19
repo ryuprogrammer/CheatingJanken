@@ -16,8 +16,6 @@ struct HandGestureView: View {
     // MARK: - ゲーム関連
     // ジャンケンのカウントダウン用プロパティ
     @State private var jankenCount: Int = 0
-    // ジャンケンの掛け声
-    @State private var jankenText: String = ""
     // ゲームの勝敗を格納
     @State private var finalResult: String?
     // 勝率を格納
@@ -112,7 +110,7 @@ struct HandGestureView: View {
                         .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
                 } else {
                     // ジャンケンのカウントダウンテキスト
-                    Text(jankenText)
+                    Text(jankenTextViewModel.jankenText)
                         .bold()
                         .font(.system(size: 80))
                         .foregroundColor(Color.white)
@@ -199,8 +197,8 @@ struct HandGestureView: View {
             }
         }
         .onChange(of: jankenCount) { jankenCount in
-            // カウント毎にテキストを変更する
-            jankenText = jankenTextViewModel.jankenText(jankenCount: jankenCount)
+            // カウント毎にテキストを更新する
+            jankenTextViewModel.makeJankenText(jankenCount: jankenCount)
         }
     }
 }

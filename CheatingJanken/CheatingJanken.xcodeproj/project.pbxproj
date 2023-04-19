@@ -27,6 +27,7 @@
 		5ADF085629E00B2C0052765D /* StageSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085529E00B2C0052765D /* StageSituation.swift */; };
 		5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF085929E020DE0052765D /* StageViewModel.swift */; };
 		5AFCD02A29EE301500BA7A86 /* StageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFCD02929EE301500BA7A86 /* StageModel.swift */; };
+		5AFCD02C29EF6B7A00BA7A86 /* JankenTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFCD02B29EF6B7A00BA7A86 /* JankenTextModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		5ADF085529E00B2C0052765D /* StageSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageSituation.swift; sourceTree = "<group>"; };
 		5ADF085929E020DE0052765D /* StageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
 		5AFCD02929EE301500BA7A86 /* StageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageModel.swift; sourceTree = "<group>"; };
+		5AFCD02B29EF6B7A00BA7A86 /* JankenTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JankenTextModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				5AFCD02929EE301500BA7A86 /* StageModel.swift */,
+				5AFCD02B29EF6B7A00BA7A86 /* JankenTextModel.swift */,
 				5ADF085529E00B2C0052765D /* StageSituation.swift */,
 				5ADF085129DFBDE90052765D /* HandGestureModel.swift */,
 				5ADF084F29DFBD410052765D /* HandGestureDetector.swift */,
@@ -249,6 +252,7 @@
 				5AB9233429E5ABA5006094D0 /* ResultView.swift in Sources */,
 				5AB9232C29E4FD63006094D0 /* CircularProgressBarView.swift in Sources */,
 				5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */,
+				5AFCD02C29EF6B7A00BA7A86 /* JankenTextModel.swift in Sources */,
 				5ADF085A29E020DE0052765D /* StageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
