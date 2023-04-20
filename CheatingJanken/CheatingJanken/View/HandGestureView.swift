@@ -47,6 +47,12 @@ struct HandGestureView: View {
         ZStack {
             CameraView(camera: camera)
                 .ignoresSafeArea(.all)
+                .onAppear {
+                    camera.start()
+                }
+                .onDisappear {
+                    camera.stop()
+                }
 
             GeometryReader { geometry in
                 // iPhoneの形状に合わせてミント色か赤色の縁を表示
@@ -140,8 +146,6 @@ struct HandGestureView: View {
                     Button {
                         // カメラを再開
                         camera.start()
-                        // ジャンケンのカウントをリセット
-                        jankenCount = 0
                         // 次のジャンケンを開始
                         isEndJanken = false
                     } label: {

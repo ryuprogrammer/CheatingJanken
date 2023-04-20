@@ -38,10 +38,6 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 let view = UIView(frame: UIScreen.main.bounds)
                 addPreviewLayer(to: view)
                 session.commitConfiguration()
-                // 非同期処理をバックグラウンドスレッドで実行
-                Task {
-                    session.startRunning()
-                }
             }
         } catch {
             print(error.localizedDescription)
@@ -51,16 +47,20 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     // MARK: - メソッド
     // キャプチャを停止するメソッド
     func stop() {
-        session.stopRunning()
-        jankenCallTimer.upstream.connect().cancel()
+        if session.isRunning {
+            session.stopRunning()
+            jankenCallTimer.upstream.connect().cancel()
+        }
     }
 
     // キャプチャを再開するメソッド
     func start() {
-        jankenCallTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
-        // 非同期処理をバックグラウンドスレッドで実行
-        Task {
-            session.startRunning()
+        if session.isRunning == false {
+            // 非同期処理をバックグラウンドスレッドで実行
+            DispatchQueue.global().async {
+                self.session.startRunning()
+            }
+            jankenCallTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
         }
     }
 
