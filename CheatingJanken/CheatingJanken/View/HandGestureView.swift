@@ -39,9 +39,15 @@ struct HandGestureView: View {
     @State var gameStage: StageSituation
     // ResultViewの表示有無
     @State private var isShowResultView: Bool = false
-    // MARK: - 背景色
+    // MARK: - 画面、背景
     // Viewの背景色のプロパティ（ジャンケンの手が有効の時青、無効の時赤に変化）
     @State private var backgroundColor = Color.red
+    // 様々なデバイスの画面の大きさにリサイズするための値（iPhone14 ProMaxの縦横サイズ）
+    let iPhone14ProMaxSizeWidth: Double = 430
+    let iPhone14ProMaxSizeHeight: Double = 932
+    // ユーザーのデバイスの画面の大きさ
+    let UserScreenWidth: Double = UIScreen.main.bounds.size.width
+    let UserScreenHeight: Double = UIScreen.main.bounds.size.height
 
     var body: some View {
         ZStack {
@@ -54,13 +60,11 @@ struct HandGestureView: View {
                     camera.stop()
                 }
 
-            GeometryReader { geometry in
-                // iPhoneの形状に合わせてミント色か赤色の縁を表示
-                RoundedRectangle(cornerRadius: 60)
-                    .stroke(backgroundColor.opacity(0.5), lineWidth: 50)
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-            }
+            // 画面の大きさに合わせて画面の縁に色をつける
+            RoundedRectangle(cornerRadius: 60)
+                .stroke(backgroundColor.opacity(0.5), lineWidth: 50)
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: UserScreenWidth, height: UserScreenHeight)
 
             VStack {
                 Button {
@@ -163,6 +167,12 @@ struct HandGestureView: View {
                         .frame(height: 155)
                 }
             }
+            .ignoresSafeArea(.all)
+            .frame(width: UserScreenWidth, height: UserScreenHeight)
+            // 各デバイスの画面の大きさに合わせる
+            .scaleEffect(CGSize(width: min(1, UserScreenWidth/iPhone14ProMaxSizeWidth),
+                                height: min(1, UserScreenHeight/iPhone14ProMaxSizeHeight)),
+                         anchor: UnitPoint.center)
             .fullScreenCover(isPresented: $isShowResultView, onDismiss: {
                 dissmiss()
             }) {
@@ -192,6 +202,8 @@ struct HandGestureView: View {
                 }
                 // １回のジャンケンを終了
                 isEndJanken = true
+                // 掛け声をリセット
+                jankenCount = 0
             }
         })
         // currentGestureが適切に判定されているか確認
