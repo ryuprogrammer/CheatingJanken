@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct HandGestureView: View {
     // MARK: - インスタンス生成
