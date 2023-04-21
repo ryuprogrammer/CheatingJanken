@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 import SwiftUI
 
 // ジャンケンゲームを実装する構造体
@@ -33,6 +34,10 @@ class HandGestureModel {
     let damage: Double = 180
     // 逆転後の勝率
     var newWinRate: Int?
+    // 勝利音
+    let winSound = try! AVAudioPlayer(data: NSDataAsset(name: "winSound")!.data)
+    // 敗北音
+    let loseSound = try! AVAudioPlayer(data: NSDataAsset(name: "loseSound")!.data)
 
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(userHandGesture: HandGestureDetector.HandGesture,
@@ -133,8 +138,10 @@ class HandGestureModel {
         // どちらかのHPがdeathHealthPointになった時点で終了
         if enemyHealthPoint == deathHealthPoint || userHealthPoint == deathHealthPoint {
             if userHealthPoint > deathHealthPoint {
+                playWinSound()
                 return GameResult.win.rawValue
             } else if enemyHealthPoint > deathHealthPoint {
+                playLoseSound()
                 return GameResult.lose.rawValue
             } else {
                 // ずっとあいこの場合
@@ -142,5 +149,23 @@ class HandGestureModel {
             }
         }
         return nil
+    }
+
+    // 勝利音再生メソッド
+    func playWinSound() {
+        if winSound.isPlaying == false {
+            winSound.stop()
+            winSound.currentTime = 0.0
+            winSound.play()
+        }
+    }
+
+    // 敗北音再生メソッド
+    func playLoseSound() {
+        if loseSound.isPlaying == false {
+            loseSound.stop()
+            loseSound.currentTime = 0.0
+            loseSound.play()
+        }
     }
 }

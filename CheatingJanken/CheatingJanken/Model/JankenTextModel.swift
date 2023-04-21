@@ -10,7 +10,7 @@ import AVFoundation
 import UIKit
 
 struct JankenTextModel {
-    let jankenSound = try! AVAudioPlayer(data: NSDataAsset(name: "sound")!.data)
+    let jankenSound = try! AVAudioPlayer(data: NSDataAsset(name: "jankenSound")!.data)
     func jankenText(jankenCount: Int) -> String {
         var jankenText: String = ""
         // カウント毎にテキストを変更する
@@ -26,10 +26,9 @@ struct JankenTextModel {
         case 6, 7: jankenText = "ぽん！！！"
         default: break
         }
-
         return jankenText
     }
-    
+
     func playJankenSound() {
         // 音声が再生中の場合は音声を再生しない
         if jankenSound.isPlaying == false {

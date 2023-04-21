@@ -153,6 +153,8 @@ struct HandGestureView: View {
                         camera.start()
                         // 次のジャンケンを開始
                         isEndJanken = false
+                        // ジャンケンの掛け声を元に戻す
+                        jankenCount = 0
                     } label: {
                         Text("次へ")
                             .bold()
@@ -184,6 +186,7 @@ struct HandGestureView: View {
             jankenCount += 1
             let jankenFinishTime: Int = 7
             if jankenCount >= jankenFinishTime {
+                // カメラを止める
                 camera.stop()
                 // ジャンケンの結果を出力
                 camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(
@@ -203,8 +206,6 @@ struct HandGestureView: View {
                 }
                 // １回のジャンケンを終了
                 isEndJanken = true
-                // 掛け声をリセット
-                jankenCount = 0
             }
         })
         // currentGestureが適切に判定されているか確認

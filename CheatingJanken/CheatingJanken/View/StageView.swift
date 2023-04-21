@@ -33,6 +33,7 @@ struct StageView: View {
                         ForEach(stageViewModel.stageSituations, id: \.self) { stageSituation in
                             Button {
                                 gameStage = stageSituation
+                                stageViewModel.stageModel.playButtonSound()
                             } label: {
                                 CardView(stageSituation: stageSituation)
                             }

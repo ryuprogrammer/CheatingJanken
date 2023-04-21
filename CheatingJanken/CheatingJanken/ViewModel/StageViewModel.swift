@@ -9,6 +9,7 @@ import Foundation
 
 class StageViewModel: ObservableObject {
     let stageModel = StageModel()
+
     @Published var stageSituations: [StageSituation] = []
 
     init() {

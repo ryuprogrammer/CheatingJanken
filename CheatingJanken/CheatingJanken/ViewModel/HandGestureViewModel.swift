@@ -19,7 +19,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     private var delegate: HandGestureDetectorDelegate?
     var handGestureModel = HandGestureModel()
 
-    @Published var jankenCallTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    @Published var jankenCallTimer = Timer.publish(every: 0.7, on: .main, in: .common).autoconnect()
     @Published var currentGesture: HandGestureDetector.HandGesture = .unknown
 
     override init() {
@@ -60,7 +60,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             DispatchQueue.global().async {
                 self.session.startRunning()
             }
-            jankenCallTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+            jankenCallTimer = Timer.publish(every: 0.7, on: .main, in: .common).autoconnect()
         }
     }
 
