@@ -32,8 +32,10 @@ struct StageView: View {
                     VStack {
                         ForEach(stageViewModel.stageSituations, id: \.self) { stageSituation in
                             Button {
+                                // タップしたステージデータをHandGestureViewに渡す
                                 gameStage = stageSituation
-                                stageViewModel.stageModel.playButtonSound()
+                                // ボタンタップ音を再生
+                                stageViewModel.stageModel.soundPlayer.buttonSoundPlay()
                             } label: {
                                 CardView(stageSituation: stageSituation)
                             }

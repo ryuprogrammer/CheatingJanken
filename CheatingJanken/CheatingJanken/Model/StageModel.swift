@@ -19,14 +19,6 @@ struct StageModel {
         StageSituation(imageName: "006", level: 6, winRate: 50, userReversalWin: nil, userReversalLose: 0.6),
         StageSituation(imageName: "007", level: 7, winRate: 30, userReversalWin: nil, userReversalLose: 0.5)
     ]
-
-    let buttonSound = try! AVAudioPlayer(data: NSDataAsset(name: "buttonSound")!.data)
-
-    func playButtonSound() {
-        if buttonSound.isPlaying == false {
-            buttonSound.stop()
-            buttonSound.currentTime = 0.0
-            buttonSound.play()
-        }
-    }
+    // soundPlayerのインスタンス生成
+    let soundPlayer = SoundPlayer()
 }
