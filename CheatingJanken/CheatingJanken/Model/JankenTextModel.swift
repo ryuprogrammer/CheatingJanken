@@ -9,10 +9,10 @@ import Foundation
 
 struct JankenTextModel {
     // soundPlayerのインスタンス生成
-    let soundPlayer = SoundPlayer()
+    var soundPlayer = SoundPlayer()
 
     // ジャンケンの掛け声用のメソッド
-    func jankenText(jankenCount: Int) -> String {
+    mutating func jankenText(jankenCount: Int) -> String {
         var jankenText: String = ""
         // カウント毎にテキストを変更する
         switch jankenCount {
@@ -20,7 +20,7 @@ struct JankenTextModel {
         case 3:  do {
             jankenText = "最初は、、"
             // jankenSoundを再生
-            soundPlayer.jankenSoundPlay()
+            soundPlayer.soundPlay(soundName: .jankenSound)
         }
         case 4: jankenText = "ぐー！"
         case 5: jankenText = "じゃんけん"

@@ -35,7 +35,7 @@ struct StageView: View {
                                 // タップしたステージデータをHandGestureViewに渡す
                                 gameStage = stageSituation
                                 // ボタンタップ音を再生
-                                stageViewModel.stageModel.soundPlayer.buttonSoundPlay()
+                                stageViewModel.playButtonSound()
                             } label: {
                                 CardView(stageSituation: stageSituation)
                             }

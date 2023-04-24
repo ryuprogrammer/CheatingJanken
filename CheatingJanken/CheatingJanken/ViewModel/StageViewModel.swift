@@ -8,11 +8,15 @@
 import Foundation
 
 class StageViewModel: ObservableObject {
-    let stageModel = StageModel()
+    var stageModel = StageModel()
 
     @Published var stageSituations: [StageSituation] = []
 
     init() {
         stageSituations = stageModel.stageSituations
+    }
+    
+    func playButtonSound() {
+        stageModel.soundPlayer.soundPlay(soundName: .buttonSound)
     }
 }

@@ -20,5 +20,5 @@ struct StageModel {
         StageSituation(imageName: "007", level: 7, winRate: 30, userReversalWin: nil, userReversalLose: 0.5)
     ]
     // soundPlayerのインスタンス生成
-    let soundPlayer = SoundPlayer()
+    var soundPlayer = SoundPlayer()
 }

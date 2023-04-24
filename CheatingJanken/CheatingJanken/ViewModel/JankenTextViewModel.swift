@@ -9,7 +9,7 @@ import Foundation
 
 class JankenTextViewModel: ObservableObject {
     // JankenTextModelのインスタンス生成
-    let jankenTextModel = JankenTextModel()
+    var jankenTextModel = JankenTextModel()
     // jankenTextをPublish
     @Published var jankenText = ""
     func makeJankenText(jankenCount: Int) {

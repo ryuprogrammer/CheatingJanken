@@ -35,7 +35,7 @@ class HandGestureModel {
     // 逆転後の勝率
     var newWinRate: Int?
     // SoundPlayerのインスタンス生成
-    let soundPlayer = SoundPlayer()
+    var soundPlayer = SoundPlayer()
 
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(userHandGesture: HandGestureDetector.HandGesture,
@@ -136,10 +136,10 @@ class HandGestureModel {
         // どちらかのHPがdeathHealthPointになった時点で終了
         if enemyHealthPoint == deathHealthPoint || userHealthPoint == deathHealthPoint {
             if userHealthPoint > deathHealthPoint {
-                soundPlayer.winSoundPlay()
+                soundPlayer.soundPlay(soundName: .winSound)
                 return GameResult.win.rawValue
             } else if enemyHealthPoint > deathHealthPoint {
-                soundPlayer.loseSoundPlay()
+                soundPlayer.soundPlay(soundName: .loseSound)
                 return GameResult.lose.rawValue
             } else {
                 // ずっとあいこの場合
