@@ -16,6 +16,7 @@ class HandGestureModel {
         case win = "勝ち！！"
         case lose = "負け。。"
         case aiko = "あいこ"
+        case error = "リトライ"
     }
 
     // 敵のジャンケン結果を格納するプロパティ
@@ -54,51 +55,59 @@ class HandGestureModel {
                 newWinRate = max(stageSituation.winRate - 30, 10)
             }
         }
-
+        
         let random = Int.random(in: 1...100)
         // プレーヤーが勝つ閾値
         let userWinNumber = newWinRate ?? stageSituation.winRate
         // プレーヤーが負ける閾値
         let userLoseNumber = 75 + userWinNumber/4
-        if random <= userWinNumber { // プレーヤーの勝ち
-            result = .win
-            // 敵のHPを減らす
-            enemyHealthPoint = hitPoint(damage: damage, healthPoint: enemyHealthPoint)
-            // 敵のHPの背景色を更新
-            enemyHealthColor = determineHealthPointColor(healthPoint: enemyHealthPoint)
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .scissors
-            case .scissors: enemyHandGesture = .paper
-            case .paper: enemyHandGesture = .rock
-            default: break
-            }
-        } else if random <= userLoseNumber { // プレーヤーの負け
-            result = .lose
-            // ユーザーのHPを減らす
-            userHealthPoint = hitPoint(damage: damage, healthPoint: userHealthPoint)
-            // ユーザーのHPの背景色を更新
-            userHealthColor = determineHealthPointColor(healthPoint: userHealthPoint)
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .paper
-            case .scissors: enemyHandGesture = .rock
-            case .paper: enemyHandGesture = .scissors
-            default: break
-            }
-        } else { // あいこ
-            result = .aiko
-            // ユーザーのHPを少し減らす
-            userHealthPoint = hitPoint(damage: damage*0.1, healthPoint: userHealthPoint)
-            // 敵のHPを少し減らす
-            enemyHealthPoint = hitPoint(damage: damage*0.1, healthPoint: enemyHealthPoint)
-            // ユーザーのHPの背景色を更新
-            userHealthColor = determineHealthPointColor(healthPoint: userHealthPoint)
-            // 敵のHPの背景色を更新
-            enemyHealthColor = determineHealthPointColor(healthPoint: enemyHealthPoint)
-            switch userHandGesture {
-            case .rock: enemyHandGesture = .rock
-            case .scissors: enemyHandGesture = .scissors
-            case .paper: enemyHandGesture = .paper
-            default: break
+        // ユーザーの手が正しく認識されているか判定
+        if userHandGesture == .unknown {
+            // リトライと表示
+            result = .error
+            // 敵の手を？？？にする
+            enemyHandGesture = .unknown
+        } else {
+            if random <= userWinNumber { // プレーヤーの勝ち
+                result = .win
+                // 敵のHPを減らす
+                enemyHealthPoint = hitPoint(damage: damage, healthPoint: enemyHealthPoint)
+                // 敵のHPの背景色を更新
+                enemyHealthColor = determineHealthPointColor(healthPoint: enemyHealthPoint)
+                switch userHandGesture {
+                case .rock: enemyHandGesture = .scissors
+                case .scissors: enemyHandGesture = .paper
+                case .paper: enemyHandGesture = .rock
+                default: break
+                }
+            } else if random <= userLoseNumber { // プレーヤーの負け
+                result = .lose
+                // ユーザーのHPを減らす
+                userHealthPoint = hitPoint(damage: damage, healthPoint: userHealthPoint)
+                // ユーザーのHPの背景色を更新
+                userHealthColor = determineHealthPointColor(healthPoint: userHealthPoint)
+                switch userHandGesture {
+                case .rock: enemyHandGesture = .paper
+                case .scissors: enemyHandGesture = .rock
+                case .paper: enemyHandGesture = .scissors
+                default: break
+                }
+            } else { // あいこ
+                result = .aiko
+                // ユーザーのHPを少し減らす
+                userHealthPoint = hitPoint(damage: damage*0.1, healthPoint: userHealthPoint)
+                // 敵のHPを少し減らす
+                enemyHealthPoint = hitPoint(damage: damage*0.1, healthPoint: enemyHealthPoint)
+                // ユーザーのHPの背景色を更新
+                userHealthColor = determineHealthPointColor(healthPoint: userHealthPoint)
+                // 敵のHPの背景色を更新
+                enemyHealthColor = determineHealthPointColor(healthPoint: enemyHealthPoint)
+                switch userHandGesture {
+                case .rock: enemyHandGesture = .rock
+                case .scissors: enemyHandGesture = .scissors
+                case .paper: enemyHandGesture = .paper
+                default: break
+                }
             }
         }
     }

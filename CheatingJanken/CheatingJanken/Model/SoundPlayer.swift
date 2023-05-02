@@ -18,7 +18,7 @@ struct SoundPlayer {
     }
     // 音源用プレーヤー変数
     var soundPlayer: AVAudioPlayer!
-    
+
     // 音源再生
     mutating func soundPlay(soundName: Sound) {
         // 音源データの読み込み

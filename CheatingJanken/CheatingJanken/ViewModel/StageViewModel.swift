@@ -15,7 +15,7 @@ class StageViewModel: ObservableObject {
     init() {
         stageSituations = stageModel.stageSituations
     }
-    
+
     func playButtonSound() {
         stageModel.soundPlayer.soundPlay(soundName: .buttonSound)
     }
