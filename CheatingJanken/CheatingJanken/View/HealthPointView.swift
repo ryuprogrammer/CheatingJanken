@@ -10,6 +10,7 @@ import SwiftUI
 struct HealthPointView: View {
     @Binding var healthPoint: Double
     @Binding var healthColor: [Color]
+    
     var body: some View {
         ZStack {
             Capsule()

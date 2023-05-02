@@ -14,6 +14,7 @@ struct StageView: View {
     @State private var gameStage: StageSituation?
     // スクロールのoffsetを格納
     @State private var offset = CGFloat.zero
+
     var body: some View {
         ZStack {
             // 背景

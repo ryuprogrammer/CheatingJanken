@@ -130,7 +130,7 @@ class HandGestureDetector: ObservableObject {
             currentGesture = .unknown
         }
 
-        print(currentGesture.rawValue)
+        print("結果：\(currentGesture.rawValue)")
         print("--------------")
 
         // delegate 経由で currentGesture を通知する

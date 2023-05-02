@@ -12,6 +12,7 @@ class JankenTextViewModel: ObservableObject {
     var jankenTextModel = JankenTextModel()
     // jankenTextをPublish
     @Published var jankenText = ""
+    
     func makeJankenText(jankenCount: Int) {
         jankenText = jankenTextModel.jankenText(jankenCount: jankenCount)
     }

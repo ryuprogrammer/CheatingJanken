@@ -11,9 +11,9 @@ import AVFoundation
 struct HandGestureView: View {
     // MARK: - インスタンス生成
     // HandGestureViewModelのインスタンス生成
-    @ObservedObject private var camera = HandGestureViewModel()
+    @StateObject private var handGestureViewModel = HandGestureViewModel()
     // JankenTextViewModelのインスタンス生成
-    private let jankenTextViewModel = JankenTextViewModel()
+    @StateObject private var jankenTextViewModel = JankenTextViewModel()
     // MARK: - ゲーム関連
     // ジャンケンのカウントダウン用プロパティ
     @State private var jankenCount: Int = 0
@@ -23,16 +23,6 @@ struct HandGestureView: View {
     @State private var showWinRate: Int?
     // １回のジャンケンの終了判定
     @State private var isEndJanken: Bool = false
-    // MARK: - 敵キャラの情報関連
-    // 敵のHPを格納
-    @State private var enemyHealthPoint: Double = 1000
-    // 敵のHPの背景色を格納
-    @State private var enemyHealthColor: [Color] = [.mint, .blue, .blue]
-    // MARK: - ユーザーの情報関連
-    // ユーザーのHPを格納
-    @State private var userHealthPoint: Double = 1000
-    // ユーザーのHPの背景色を格納
-    @State private var userHealthColor: [Color] = [.mint, .blue, .blue]
     // MARK: - 画面遷移
     // 環境変数を利用して画面を戻る
     @Environment(\.dismiss) private var dissmiss
@@ -44,21 +34,21 @@ struct HandGestureView: View {
     // Viewの背景色のプロパティ（ジャンケンの手が有効の時青、無効の時赤に変化）
     @State private var backgroundColor = Color.red
     // 様々なデバイスの画面の大きさにリサイズするための値（iPhone14 ProMaxの縦横サイズ）
-    let iPhone14ProMaxSizeWidth: Double = 430
-    let iPhone14ProMaxSizeHeight: Double = 932
+    private let iPhone14ProMaxSizeWidth: Double = 430
+    private let iPhone14ProMaxSizeHeight: Double = 932
     // ユーザーのデバイスの画面の大きさ
-    let UserScreenWidth: Double = UIScreen.main.bounds.size.width
-    let UserScreenHeight: Double = UIScreen.main.bounds.size.height
+    private let UserScreenWidth: Double = UIScreen.main.bounds.size.width
+    private let UserScreenHeight: Double = UIScreen.main.bounds.size.height
 
     var body: some View {
         ZStack {
-            CameraView(camera: camera)
+            CameraView(camera: handGestureViewModel)
                 .ignoresSafeArea(.all)
                 .onAppear {
-                    camera.start()
+                    handGestureViewModel.start()
                 }
                 .onDisappear {
-                    camera.stop()
+                    handGestureViewModel.stop()
                 }
 
             // 画面の大きさに合わせて画面の縁に色をつける
@@ -84,7 +74,7 @@ struct HandGestureView: View {
                 .padding(.leading, 40)
 
                 // 勝率を表示
-                Text("勝率：\(camera.handGestureModel.newWinRate ?? gameStage.winRate) %")
+                Text("勝率：\(handGestureViewModel.newWinRate ?? gameStage.winRate) %")
                     .bold()
                     .font(.system(size: 30))
                     .foregroundColor(Color.white)
@@ -93,7 +83,7 @@ struct HandGestureView: View {
                 HStack {
                     if isEndJanken {
                         // キャラクターのジャンケン結果を表示
-                        Text("\(camera.handGestureModel.enemyHandGesture.rawValue)")
+                        Text("\(handGestureViewModel.enemyHandGesture.rawValue)")
                             .bold()
                             .font(.system(size: 50))
                             .foregroundColor(Color.white)
@@ -109,12 +99,12 @@ struct HandGestureView: View {
                 }
 
                 // 敵のHPを表示
-                HealthPointView(healthPoint: $enemyHealthPoint,
-                                healthColor: $enemyHealthColor)
+                HealthPointView(healthPoint: $handGestureViewModel.enemyHealthPoint,
+                                healthColor: $handGestureViewModel.enemyHealthColor)
 
                 if isEndJanken {
                     // ジャンケン結果を表示
-                    Text("\(camera.handGestureModel.result.rawValue)")
+                    Text("\(handGestureViewModel.result.rawValue)")
                         .bold()
                         .font(.system(size: 100))
                         .foregroundColor(Color.white)
@@ -129,7 +119,7 @@ struct HandGestureView: View {
                 }
 
                 // ユーザーのHandPoseを表示
-                Text("\(camera.handGestureDetector.currentGesture.rawValue)")
+                Text("\(handGestureViewModel.handGestureDetector.currentGesture.rawValue)")
                     .bold()
                     .font(.system(size: 100))
                     .foregroundColor(Color.white)
@@ -143,14 +133,14 @@ struct HandGestureView: View {
                     .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
 
                 // ユーザーのHPを表示
-                HealthPointView(healthPoint: $userHealthPoint,
-                                healthColor: $userHealthColor)
+                HealthPointView(healthPoint: $handGestureViewModel.userHealthPoint,
+                                healthColor: $handGestureViewModel.userHealthColor)
 
                 // ゲーム再開ボタン
                 if isEndJanken {
                     Button {
                         // カメラを再開
-                        camera.start()
+                        handGestureViewModel.start()
                         // 次のジャンケンを開始
                         isEndJanken = false
                         // ジャンケンの掛け声を元に戻す
@@ -182,24 +172,16 @@ struct HandGestureView: View {
                 ResultView(finalResult: $finalResult, gameStage: $gameStage)
             }
         }
-        .onReceive(camera.jankenCallTimer, perform: { _ in
+        .onReceive(handGestureViewModel.jankenCallTimer, perform: { _ in
             jankenCount += 1
             let jankenFinishTime: Int = 7
             if jankenCount >= jankenFinishTime {
                 // カメラを止める
-                camera.stop()
+                handGestureViewModel.stop()
                 // ジャンケンの結果を出力
-                camera.handGestureModel.JankenResult(userHandGesture: HandGestureDetector.HandGesture(
-                                                        rawValue: camera.handGestureDetector.currentGesture.rawValue) ?? .unknown, stageSituation: gameStage)
-                withAnimation {
-                    // HPをアニメーションで変化させる
-                    enemyHealthPoint = camera.handGestureModel.enemyHealthPoint
-                    userHealthPoint = camera.handGestureModel.userHealthPoint
-                    enemyHealthColor = camera.handGestureModel.enemyHealthColor
-                    userHealthColor = camera.handGestureModel.userHealthColor
-                }
+                handGestureViewModel.JankenResult(stageSituation: gameStage)
                 // ゲーム終了を判定
-                finalResult = camera.handGestureModel.judgeWinner(enemyHealthPoint: enemyHealthPoint, userHealthPoint: userHealthPoint)
+                finalResult = handGestureViewModel.judgeWinner()
 
                 if let _ = finalResult {
                     isShowResultView = true
@@ -209,7 +191,7 @@ struct HandGestureView: View {
             }
         })
         // currentGestureが適切に判定されているか確認
-        .onChange(of: camera.handGestureDetector.currentGesture.rawValue) { currentGesture in
+        .onChange(of: handGestureViewModel.currentGesture.rawValue) { currentGesture in
             withAnimation {
                 backgroundColor = (currentGesture == "？？？" ? .red : .mint)
             }

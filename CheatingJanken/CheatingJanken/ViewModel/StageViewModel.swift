@@ -8,10 +8,12 @@
 import Foundation
 
 class StageViewModel: ObservableObject {
+    // StageModelのインスタンス生成
     var stageModel = StageModel()
 
     @Published var stageSituations: [StageSituation] = []
 
+    // イニシャライザ（インスタンス生成時に初期化）
     init() {
         stageSituations = stageModel.stageSituations
     }
