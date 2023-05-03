@@ -69,7 +69,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         jankenText = jankenTextModel.jankenText(jankenCount: jankenCount)
     }
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-    func JankenResult(stageSituation: StageSituation) {
+    func calculateJankenResult(stageSituation: StageSituation) {
         // 逆転勝利の有無によってwinRateを増加
         if let userReversalWin = stageSituation.userReversalWin {
             if userHealthPoint <= 1000*userReversalWin {
