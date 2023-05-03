@@ -10,6 +10,8 @@ import AVFoundation
 import Vision
 
 class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate, HandGestureDetectorDelegate {
+    // JankenTextModelのインスタンス生成
+    var jankenTextModel = JankenTextModel()
     // HandGestureModelのインスタンス
     let handGestureModel = HandGestureModel()
 
@@ -34,6 +36,8 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     @Published var enemyHandGesture: HandGestureDetector.HandGesture = .unknown
     // ジャンケンの結果を格納するプロパティ
     @Published var result: HandGestureModel.GameResult = .aiko
+    // jankenTextをPublish
+    @Published var jankenText = ""
     // ダメージ
     private let damage: Double = 180
 
@@ -60,6 +64,10 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     }
 
     // MARK: - メソッド
+    // じゃんけんの掛け声用メソッド
+    func makeJankenText(jankenCount: Int) {
+        jankenText = jankenTextModel.jankenText(jankenCount: jankenCount)
+    }
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func JankenResult(stageSituation: StageSituation) {
         // 逆転勝利の有無によってwinRateを増加
