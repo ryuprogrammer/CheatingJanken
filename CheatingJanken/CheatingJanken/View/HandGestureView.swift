@@ -59,7 +59,7 @@ struct HandGestureView: View {
 
                     // 勝率を表示
                     winRateView
-                    
+
                     // 敵のView
                     enemyContentsView
 
@@ -72,7 +72,6 @@ struct HandGestureView: View {
                     // ゲーム再開ボタン
                     jankenButtonView
                 }
-                .ignoresSafeArea(.all)
                 .frame(width: userScreenWidth, height: userScreenHeight)
                 // 各デバイスの画面の大きさに合わせる
                 .scaleEffect(CGSize(width: min(1, userScreenWidth/geometry.size.width),
@@ -115,7 +114,7 @@ struct HandGestureView: View {
             handGestureViewModel.makeJankenText(jankenCount: jankenCount)
         }
     }
-    
+
     @ViewBuilder
     private var winRateView: some View {
         // 勝率を表示
@@ -125,7 +124,7 @@ struct HandGestureView: View {
             .foregroundColor(Color.white)
             .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
     }
-    
+
     @ViewBuilder
     private var enemyContentsView: some View {
         HStack {
@@ -150,7 +149,7 @@ struct HandGestureView: View {
         HealthPointView(healthPoint: $handGestureViewModel.enemyHealthPoint,
                         healthColor: $handGestureViewModel.enemyHealthColor)
     }
-    
+
     @ViewBuilder
     private var resultView: some View {
         if isEndJanken {
@@ -169,7 +168,7 @@ struct HandGestureView: View {
                 .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
         }
     }
-    
+
     @ViewBuilder
     private var returnButton: some View {
         Button {
@@ -187,7 +186,7 @@ struct HandGestureView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 40)
     }
-    
+
     @ViewBuilder
     private var userContentsView: some View {
         // ユーザーのHandPoseを表示
@@ -208,7 +207,7 @@ struct HandGestureView: View {
         HealthPointView(healthPoint: $handGestureViewModel.userHealthPoint,
                         healthColor: $handGestureViewModel.userHealthColor)
     }
-    
+
     @ViewBuilder
     private var jankenButtonView: some View {
         // ゲーム再開ボタン

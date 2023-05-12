@@ -15,7 +15,7 @@ struct ResultView: View {
     @State private var offset = CGFloat.zero
     // アニメーション
     @State private var isAnimate: Bool = false
-    
+
     var body: some View {
         ZStack {
             // 背景View
