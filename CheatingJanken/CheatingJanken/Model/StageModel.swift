@@ -7,7 +7,6 @@
 
 import Foundation
 import AVFoundation
-import SwiftUI
 
 struct StageModel {
     let stageSituations: [StageSituation] = [

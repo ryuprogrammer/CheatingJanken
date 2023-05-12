@@ -16,15 +16,16 @@ struct JankenTextModel {
         var jankenText: String = ""
         // カウント毎にテキストを変更する
         switch jankenCount {
-        case 0, 1, 2: jankenText = "Ready???"
-        case 3:  do {
+        case 0...10: jankenText = "Ready???"
+        case 11: do {
             jankenText = "最初は、、"
             // jankenSoundを再生
             soundPlayer.soundPlay(soundName: .jankenSound)
         }
-        case 4: jankenText = "ぐー！"
-        case 5: jankenText = "じゃんけん"
-        case 6, 7: jankenText = "ぽん！！！"
+        case 12...14: jankenText = "最初は、、"
+        case 15...18: jankenText = "ぐー！"
+        case 19...22: jankenText = "じゃんけん"
+        case 23...25: jankenText = "ぽん！！！"
         default: break
         }
         return jankenText

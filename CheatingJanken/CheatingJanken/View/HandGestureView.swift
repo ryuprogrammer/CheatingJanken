@@ -53,13 +53,7 @@ struct HandGestureView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: userScreenWidth, height: userScreenHeight)
 
-                VStack {
-                    // 戻るボタン
-                    returnButton
-
-                    // 勝率を表示
-                    winRateView
-
+                VStack(spacing: 30) {
                     // 敵のView
                     enemyContentsView
 
@@ -68,11 +62,12 @@ struct HandGestureView: View {
 
                     // ユーザーのView
                     userContentsView
-
-                    // ゲーム再開ボタン
-                    jankenButtonView
+                    
+                    Spacer()
+                        .frame(height: 50)
                 }
-                .frame(width: userScreenWidth, height: userScreenHeight)
+                .ignoresSafeArea(.all)
+                .frame(width: geometry.size.width, height: geometry.size.height)
                 // 各デバイスの画面の大きさに合わせる
                 .scaleEffect(CGSize(width: min(1, userScreenWidth/geometry.size.width),
                                     height: min(1, userScreenHeight/geometry.size.height)),
@@ -82,12 +77,25 @@ struct HandGestureView: View {
                 }) {
                     ResultView(finalResult: $finalResult, gameStage: $gameStage)
                 }
+                
+                // ボタン系
+                VStack {
+                    // 戻るボタン
+                    returnButton
+                    
+                    Spacer()
+                    
+                    // ゲーム再開ボタン
+                    jankenButtonView
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .onReceive(handGestureViewModel.jankenCallTimer, perform: { _ in
             jankenCount += 1
-            let jankenFinishTime: Int = 7
+            let jankenFinishTime: Int = 25
+            
             if jankenCount >= jankenFinishTime {
                 // カメラを止める
                 handGestureViewModel.stop()
@@ -114,35 +122,23 @@ struct HandGestureView: View {
             handGestureViewModel.makeJankenText(jankenCount: jankenCount)
         }
     }
-
-    @ViewBuilder
-    private var winRateView: some View {
-        // 勝率を表示
-        Text("勝率：\(handGestureViewModel.newWinRate ?? gameStage.winRate) %")
-            .bold()
-            .font(.system(size: 30))
-            .foregroundColor(Color.white)
-            .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-    }
-
+    
     @ViewBuilder
     private var enemyContentsView: some View {
         HStack {
-            if isEndJanken {
-                // キャラクターのジャンケン結果を表示
-                Text("\(handGestureViewModel.enemyHandGesture.rawValue)")
-                    .bold()
-                    .font(.system(size: 50))
-                    .foregroundColor(Color.white)
-                    .rotationEffect(Angle(degrees: -30))
-                    .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-            }
+            // キャラクターのジャンケン結果を表示
+            Text(isEndJanken ? "\(handGestureViewModel.enemyHandGesture.rawValue)" : "✊")
+                .bold()
+                .font(.system(size: 70))
+                .foregroundColor(Color.white)
+                .rotationEffect(Angle(degrees: -30))
+                .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
 
             // キャラクターを配置
             Image("\(gameStage.imageName)")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 200, height: 200)
+                .frame(width: 180, height: 180)
         }
 
         // 敵のHPを表示
@@ -152,21 +148,12 @@ struct HandGestureView: View {
 
     @ViewBuilder
     private var resultView: some View {
-        if isEndJanken {
-            // ジャンケン結果を表示
-            Text("\(handGestureViewModel.result.rawValue)")
-                .bold()
-                .font(.system(size: 100))
-                .foregroundColor(Color.white)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-        } else {
-            // ジャンケンのカウントダウンテキスト
-            Text(handGestureViewModel.jankenText)
-                .bold()
-                .font(.system(size: 80))
-                .foregroundColor(Color.white)
-                .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-        }
+        // ジャンケンのテキスト
+        Text(isEndJanken ? handGestureViewModel.result.rawValue : handGestureViewModel.jankenText)
+            .bold()
+            .font(.system(size: 80))
+            .foregroundColor(Color.white)
+            .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
     }
 
     @ViewBuilder
@@ -180,8 +167,9 @@ struct HandGestureView: View {
                 .foregroundColor(Color.white)
                 .padding()
                 .frame(width: 120, height: 40)
-                .background(Color.white.opacity(0.3))
+                .background(Color.cyan.opacity(0.5))
                 .cornerRadius(20)
+                .padding(.top, 20)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 40)
@@ -192,15 +180,9 @@ struct HandGestureView: View {
         // ユーザーのHandPoseを表示
         Text("\(handGestureViewModel.handGestureDetector.currentGesture.rawValue)")
             .bold()
-            .font(.system(size: 100))
+            .font(.system(size: 130))
             .foregroundColor(Color.white)
             .rotation3DEffect(Angle(degrees: 180), axis: (x: 0, y: 1, z: 0))
-            .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-
-        Text("あなた")
-            .bold()
-            .font(.system(size: 30))
-            .foregroundColor(Color.white)
             .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
 
         // ユーザーのHPを表示
@@ -211,27 +193,25 @@ struct HandGestureView: View {
     @ViewBuilder
     private var jankenButtonView: some View {
         // ゲーム再開ボタン
-        if isEndJanken {
-            Button {
+        Button {
+            if isEndJanken {
                 // カメラを再開
                 handGestureViewModel.start()
                 // 次のジャンケンを開始
                 isEndJanken = false
                 // ジャンケンの掛け声を元に戻す
                 jankenCount = 0
-            } label: {
-                Text("次へ")
-                    .bold()
-                    .font(.system(size: 50))
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .frame(width: 230, height: 85)
-                    .background(Color.white.opacity(0.3))
-                    .cornerRadius(20)
             }
-        } else {
-            Spacer()
-                .frame(height: 155)
+        } label: {
+            Text("次へ")
+                .bold()
+                .font(.system(size: 50))
+                .foregroundColor(isEndJanken ? Color.white : Color.clear)
+                .padding()
+                .frame(width: 230, height: 55)
+                .background(isEndJanken ? Color.cyan.opacity(0.5) : Color.clear)
+                .cornerRadius(20)
+                .padding(.bottom, 20)
         }
     }
 }

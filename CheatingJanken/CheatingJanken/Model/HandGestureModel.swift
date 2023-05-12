@@ -5,7 +5,6 @@
 //  Created by トム・クルーズ on 2023/04/07.
 //
 
-import Foundation
 import AVFoundation
 import SwiftUI
 
