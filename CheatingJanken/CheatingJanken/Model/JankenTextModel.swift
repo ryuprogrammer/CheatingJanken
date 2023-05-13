@@ -14,18 +14,23 @@ struct JankenTextModel {
     // ジャンケンの掛け声用のメソッド
     mutating func jankenText(jankenCount: Int) -> String {
         var jankenText: String = ""
+        let readyCount = 0...10
+        let firstCount = 11
+        let secondCount = 15...18
+        let thirdCount = 19...22
+        let finalCount = 23...25
+        
         // カウント毎にテキストを変更する
         switch jankenCount {
-        case 0...10: jankenText = "Ready???"
-        case 11: do {
+        case readyCount: jankenText = "Ready???"
+        case firstCount: do {
             jankenText = "最初は、、"
             // jankenSoundを再生
             soundPlayer.soundPlay(soundName: .jankenSound)
         }
-        case 12...14: jankenText = "最初は、、"
-        case 15...18: jankenText = "ぐー！"
-        case 19...22: jankenText = "じゃんけん"
-        case 23...25: jankenText = "ぽん！！！"
+        case secondCount: jankenText = "ぐー！"
+        case thirdCount: jankenText = "じゃんけん"
+        case finalCount: jankenText = "ぽん！！！"
         default: break
         }
         return jankenText

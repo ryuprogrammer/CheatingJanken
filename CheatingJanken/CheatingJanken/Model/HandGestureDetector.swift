@@ -81,31 +81,6 @@ class HandGestureDetector: ObservableObject {
         let wristToRingPIP = distance(from: wrist, to: ringPIP)
         let wristToLittlePIP = distance(from: wrist, to: littlePIP)
 
-//        // 人差し指が曲がっているかチェック
-//        if wristToIndexTip > wristToIndexPIP {
-//            print("人差し指：まっすぐ")
-//        } else if wristToIndexTip < wristToIndexPIP {
-//            print("人差し指：曲がってる")
-//        }
-//        // 中指が曲がっているかチェック
-//        if wristToMiddleTip > wristToMiddlePIP {
-//            print("中指：まっすぐ")
-//        } else if wristToMiddleTip < wristToMiddlePIP {
-//            print("中指：曲がってる")
-//        }
-//        // 薬指が曲がっているかチェック
-//        if wristToRingTip > wristToRingPIP {
-//            print("薬指：まっすぐ")
-//        } else if wristToRingTip < wristToRingPIP {
-//            print("薬指：曲がってる")
-//        }
-//        // 小指が曲がっているかチェック
-//        if wristToLittleTip > wristToLittlePIP {
-//            print("小指：まっすぐ")
-//        } else if wristToLittleTip < wristToLittlePIP {
-//            print("小指：曲がってる")
-//        }
-
         // HandPoseの判定(どの指が曲がっているかでグーチョキパーを判定する）
         if
             wristToIndexTip > wristToIndexPIP &&
