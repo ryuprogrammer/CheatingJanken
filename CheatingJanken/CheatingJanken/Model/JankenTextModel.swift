@@ -19,7 +19,7 @@ struct JankenTextModel {
         let secondCount = 15...18
         let thirdCount = 19...22
         let finalCount = 23...25
-        
+
         // カウント毎にテキストを変更する
         switch jankenCount {
         case readyCount: jankenText = "Ready???"

@@ -62,7 +62,7 @@ struct HandGestureView: View {
 
                     // ユーザーのView
                     userContentsView
-                    
+
                     Spacer()
                         .frame(height: 50)
                 }
@@ -77,14 +77,14 @@ struct HandGestureView: View {
                 }) {
                     ResultView(finalResult: $finalResult, gameStage: $gameStage)
                 }
-                
+
                 // ボタン系
                 VStack {
                     // 戻るボタン
                     returnButton
-                    
+
                     Spacer()
-                    
+
                     // ゲーム再開ボタン
                     jankenButtonView
                 }
@@ -95,7 +95,7 @@ struct HandGestureView: View {
         .onReceive(handGestureViewModel.jankenCallTimer, perform: { _ in
             jankenCount += 1
             let jankenFinishTime: Int = 25
-            
+
             if jankenCount >= jankenFinishTime {
                 // カメラを止める
                 handGestureViewModel.stop()
@@ -122,7 +122,7 @@ struct HandGestureView: View {
             handGestureViewModel.makeJankenText(jankenCount: jankenCount)
         }
     }
-    
+
     @ViewBuilder
     private var enemyContentsView: some View {
         HStack {

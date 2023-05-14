@@ -14,12 +14,12 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     var jankenTextModel = JankenTextModel()
     // HandGestureModelのインスタンス
     let handGestureModel = HandGestureModel()
-    
+
     let handGestureDetector: HandGestureDetector
     // AVCaptureSessionのインスタンス生成
     private let session = AVCaptureSession()
     private var delegate: HandGestureDetectorDelegate?
-    
+
     @Published var jankenCallTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     @Published var currentGesture: HandGestureDetector.HandGesture = .unknown
     // 敵のHPを格納
@@ -40,7 +40,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     @Published var jankenText = ""
     // ダメージ
     private let damage: Double = 180
-    
+
     override init() {
         handGestureDetector = HandGestureDetector()
         super.init()
@@ -62,14 +62,14 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             print(error.localizedDescription)
         }
     }
-    
+
     // MARK: - メソッド
     // じゃんけんの掛け声用メソッド
     func makeJankenText(jankenCount: Int) {
         jankenText = jankenTextModel.jankenText(jankenCount: jankenCount)
     }
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-    
+
     func calculateJankenResult(stageSituation: StageSituation) {
         // 逆転勝利の有無によってwinRateを増加
         if let userReversalWin = stageSituation.userReversalWin {
@@ -85,13 +85,13 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 newWinRate = max(stageSituation.winRate - 30, 10)
             }
         }
-        
+
         let random = Int.random(in: 1...100)
         // プレーヤーが勝つ閾値
         let userWinNumber = newWinRate ?? stageSituation.winRate
         // プレーヤーが負ける閾値
         let userLoseNumber = 75 + userWinNumber/4
-        
+
         // ユーザーの手が正しく認識されているか判定
         if currentGesture == .unknown {
             // リトライと表示
@@ -147,21 +147,19 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 }
             }
         }
-        
-        
-        
+
     }
-    
+
     // ゲームが終了したら勝敗を判定
     func judgeWinner() -> String? {
         return handGestureModel.judgeWinner(enemyHealthPoint: enemyHealthPoint, userHealthPoint: userHealthPoint)
     }
-    
+
     // handGestureDetector
     func handGestureDetector(_ handGestureDetector: HandGestureDetector, didRecognize gesture: HandGestureDetector.HandGesture) {
         // 何もしない
     }
-    
+
     // キャプチャを停止するメソッド
     func stop() {
         if session.isRunning {
@@ -169,7 +167,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             jankenCallTimer.upstream.connect().cancel()
         }
     }
-    
+
     // キャプチャを再開するメソッド
     func start() {
         if session.isRunning == false {
@@ -180,7 +178,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             jankenCallTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
         }
     }
-    
+
     // キャプチャセッションから得られたカメラ映像を表示するためのレイヤーを追加するメソッド
     func addPreviewLayer(to view: UIView) {
         let layer = AVCaptureVideoPreviewLayer(session: session)
@@ -188,19 +186,19 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         layer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(layer) // UIViewにAVCaptureVideoPreviewLayerを追加
     }
-    
+
     // AVCaptureVideoDataOutputから取得した動画フレームからてのジェスチャーを検出するメソッド
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        
+
         let request = try? handGestureDetector.createDetectionRequest(pixelBuffer: pixelBuffer)
-        
+
         guard let observations = request?.results as? [VNRecognizedPointsObservation] else {
             return
         }
-        
+
         // 実際にジェスチャーからHandGestureを判別する
         handGestureDetector.processObservations(observations)
     }
