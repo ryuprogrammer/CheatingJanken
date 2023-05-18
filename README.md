@@ -39,12 +39,11 @@
 ## Model
 | ファイル名 | 概要・解説 |
 | ---- | ---- |
-| StageModel | a |
-| SoundPlayer | a |
-| JankenTextModel | a |
-| StageSituation | a |
-| HandGestureModel | a |
-| HandGestureDetector | s |
+| StageModel | キャラクターのレベルや初期勝率、逆転の有無などの情報を格納した構造体 |
+| SoundPlayer | 効果音を再生するメソッドなどを記述したクラス |
+| JankenTextModel | じゃんけんの掛け声とタイミングのメソッドを記述したクラス |
+| HandGestureModel | ゲーム終了を判定するメソッド、HPを計算するメソッドなどを記述したクラス |
+| HandGestureDetector | 動画フレームからVisionを用いてジェスチャーを判別するメソッドなどを記述したクラス |
 
 ## 8. 工夫したコード／設計
 
