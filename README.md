@@ -16,7 +16,7 @@
 ##  4. ダウンロードリンク
 [![App_Store_Badge_JP](https://user-images.githubusercontent.com/68992872/204145956-f5cc0fa8-d4c9-4f2c-b1d4-3c3b1d2e2aba.png)](https://apps.apple.com/jp/app/%E9%80%86%E8%BB%A2%E3%81%98%E3%82%83%E3%82%93%E3%81%91%E3%82%93/id6448696945)
 
-## 5. リリース予定の内容
+## 5. 今後の改善予定
 今後は手の認識の速度を向上させます。
 
 ## 6. アプリの設計について
