@@ -8,26 +8,17 @@
 <img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/5c9ef1f4-230d-4a37-a0bd-39881b060d5f">
 <img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/12db335f-02b9-4023-984c-28a015a007a7">
 
-## 3. アプリの動作
-### タスクの追加方法
-タスク内容、アイコンの色、時間を入力するだけで簡単に追加できます。
+## 3. アプリの動作（Gif）
+ユーザーの手を認識してじゃんけんをします。
 
 <img width="200" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/0c1dfdc9-77c1-42a0-93f0-768953fe6f4f">
 
-### 姿勢の検知
-姿勢を検知して、正しい姿勢の時だけタイマーが進みます。
-
-<img width="200" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/d77f7e81-32e9-4330-aac3-b644c45b4655">
-
-
 ##  4. ダウンロードリンク
 ↓ダウンロードリンクを画像に埋め込みたいが、方法がわからない。
-https://apps.apple.com/jp/app/%E3%83%9D%E3%82%B9%E3%82%BF/id6448646839
+[ダウンロードはこちら](https://apps.apple.com/jp/app/%E9%80%86%E8%BB%A2%E3%81%98%E3%82%83%E3%82%93%E3%81%91%E3%82%93/id6448696945)
 
 ## 5. リリース予定の内容
-今後はStudyPlus（勉強版Twitter）に完了したタスクを登録する機能を実装します！
-
-ここから以降は、主にエンジニアチームに向けてのアピールです。
+今後は手の認識の速度を向上させます。
 
 ## 6. アプリの設計について
 <img width="600" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/897116c8-d0bf-48ca-8548-560eeac9e49c">
