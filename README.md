@@ -12,7 +12,7 @@
 ### タスクの追加方法
 タスク内容、アイコンの色、時間を入力するだけで簡単に追加できます。
 
-<img width="200" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/acf5eae5-7eff-4bf1-8a35-0790fec248b4">
+<img width="200" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/0c1dfdc9-77c1-42a0-93f0-768953fe6f4f">
 
 ### 姿勢の検知
 姿勢を検知して、正しい姿勢の時だけタイマーが進みます。
