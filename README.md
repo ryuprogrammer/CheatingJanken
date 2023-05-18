@@ -25,23 +25,26 @@
 ## View
 | ファイル名 | 概要・解説 |
 | ---- | ---- |
-| StageView | a |
-| HandGestureView | a |
-| ResultView | a |
-| HealthPointView | s |
-| BackgroundView | a |
+| StageView | キャラクターと難易度をScrolleViewで表示するViewです。 |
+| HandGestureView | 手を検知してじゃんけんをするViewです。 |
+| ResultView | じゃんけんの結果を表示するViewです。 |
+| BackgroundView | StageViewの背景のViewです。GeometryReaderを用いてスクロールに応じて背景が動きます。 |
 
 ## ViewModel
 | ファイル名 | 概要・解説 |
 | ---- | ---- |
-| StageViewModel | a |
-| HandGestureViewModel | a |
+| StageViewModel | StageModelのインスタンス、ボタンを押した時の効果音メソッドを記述したクラス |
+| HandGestureViewModel | 勝率からゲーム結果を算出するメソッドや動画フレームから手のジェスチャーを検出するメソッドなどを記述したクラス |
 
 ## Model
 | ファイル名 | 概要・解説 |
 | ---- | ---- |
 | StageModel | a |
 | SoundPlayer | a |
+| JankenTextModel | a |
+| StageSituation | a |
+| HandGestureModel | a |
+| HandGestureDetector | s |
 
 ## 8. 工夫したコード／設計
 
