@@ -21,11 +21,26 @@
 今後は手の認識の速度を向上させます。
 
 ## 6. アプリの設計について
-<img width="600" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/897116c8-d0bf-48ca-8548-560eeac9e49c">
-<img width="600" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/95b434ac-2d3d-4220-bfaf-7408596ed437">
-<img width="600" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/4f2ebd07-1acc-4e67-b4af-e90203d0fc34">
-<img width="600" src="https://github.com/CodeCandySchool/GoodPostureStudy_ryu/assets/120238831/2e30f7e3-0c01-4df4-afbf-29eaff5053ca">
+## View
+| ファイル名 | 概要・解説 |
+| ---- | ---- |
+| StageView | a |
+| HandGestureView | a |
+| ResultView | a |
+| HealthPointView | s |
+| BackgroundView | a |
 
+## ViewModel
+| ファイル名 | 概要・解説 |
+| ---- | ---- |
+| StageViewModel | a |
+| HandGestureViewModel | a |
+
+## Model
+| ファイル名 | 概要・解説 |
+| ---- | ---- |
+| StageModel | a |
+| SoundPlayer | a |
 
 - フローチャート
 こちらで[フローチャートについて学習をして](https://cacoo.com/ja/blog/keep-it-simple-how-to-avoid-overcomplicating-your-flowcharts/)、フローチャートを記述してみてください。
