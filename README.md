@@ -1,5 +1,5 @@
 # 『逆転じゃんけん』
-<img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/e40d4ec3-76d8-4aa7-ba82-b8cd7836214b">
+<img width="600" src="https://github.com/ryuprogrammer/CheatingJanken_ryu/assets/120238831/e40d4ec3-76d8-4aa7-ba82-b8cd7836214b">
 
 ## 1. 概要・コンセプト
 <img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/9683c83d-504b-4e5b-b1ab-b462d6a50f1a">
