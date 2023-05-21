@@ -50,16 +50,16 @@
 開発初期段階では、じゃんけんの手を3000枚撮影して、CreateMLを用いてモデルを作成して、CoreMLを用いて手を判別しました。しかし３度モデルを作り直しても判別の制度が良くならなかったのでVisionのみで手の判別をすることにしました。Visionでは、手の骨格の座標情報が取得できます。そこで、以下のような手順で手の判別を行うことで精度を向上させました。
 
 ・手順１：Visionを用いて指先、第二関節、手首の座標を取得
-https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L59-L70
+https://github.com/ryuprogrammer/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L59-L70
 
 ・手順２：三平方の定理より２点の距離を求めるメソッド作成
-https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L112-L115
+https://github.com/ryuprogrammer/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L112-L115
 
 ・手順３：手首から親指以外の指までの距離を求める
-https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L72-L82
+https://github.com/ryuprogrammer/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L72-L82
 
 ・手順４：どの指が曲がっているかによってグーチョキパーを判別
-https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L84-L106
+https://github.com/ryuprogrammer/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L84-L106
 
 ## 9 その他リンク
 [アプリのホームページ](https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066)  
