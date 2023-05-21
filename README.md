@@ -47,7 +47,8 @@
 
 ## 8. 工夫したコード／設計
 ### ポイント１　じゃんけんの手を判別
-開発初期段階では、じゃんけんの手を3000枚撮影して、CreateMLを用いてモデルを作成して、CoreMLを用いて手を判別しました。しかし３度モデルを作り直しても判別の制度が良くならなかったのでVisionのみで手の判別をすることにしました。Visionでは、手の骨格の座標情報が取得できます。そこで、以下のような手順で手の判別を行うことで精度を向上させました。
+開発初期段階では、じゃんけんの手を3000枚撮影して、CreateMLを用いてモデルを作成して、CoreMLを用いて手を判別しました。しかし３度モデルを作り直しても判別の制度が良くならなかったのでVisionのみで手の判別をすることにしました。  
+Visionでは、手の骨格の座標情報が取得できます。そこで、以下のような手順で手の判別を行うことで精度を向上させました。
 
 ・手順１：Visionを用いて指先、第二関節、手首の座標を取得
 https://github.com/ryuprogrammer/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L59-L70
