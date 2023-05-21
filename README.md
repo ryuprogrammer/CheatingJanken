@@ -62,6 +62,6 @@ https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5f
 https://github.com/CodeCandySchool/CheatingJanken_ryu/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L84-L106
 
 ## 9 その他リンク
-[ホームページ](https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066)
+[ホームページ](https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066). 
 [Twitter](https://twitter.com/engineerforios?s=11&t=E3_w-CiFaS5cBpi-By2fYg)
 
