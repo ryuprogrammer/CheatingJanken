@@ -11,7 +11,7 @@
 ## 3. アプリの動作（Gif）
 ユーザーの手を認識してじゃんけんをします。
 
-<img width="200" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/0c1dfdc9-77c1-42a0-93f0-768953fe6f4f">
+<img width="200" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/4c4c592d-2d57-44b9-9776-13338e645e3e">
 
 ##  4. ダウンロードリンク
 [![App_Store_Badge_JP](https://user-images.githubusercontent.com/68992872/204145956-f5cc0fa8-d4c9-4f2c-b1d4-3c3b1d2e2aba.png)](https://apps.apple.com/jp/app/%E9%80%86%E8%BB%A2%E3%81%98%E3%82%83%E3%82%93%E3%81%91%E3%82%93/id6448696945)
