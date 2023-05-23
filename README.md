@@ -1,12 +1,12 @@
 # 『逆転じゃんけん』
-<img width="600" src="https://github.com/CheatingJanken_ryu/assets/120238831/e40d4ec3-76d8-4aa7-ba82-b8cd7836214b">
+<img width="600" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/870180af-2c58-4a53-b25b-70eb537ef7d7">
 
 ## 1. 概要・コンセプト
-<img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/9683c83d-504b-4e5b-b1ab-b462d6a50f1a">
+<img width="600" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/b04f3599-4e9b-461b-b72e-5c9bcb95a2d3">
 
 ## 2. アプリの画面２つ
-<img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/5c9ef1f4-230d-4a37-a0bd-39881b060d5f">
-<img width="600" src="https://github.com/CodeCandySchool/CheatingJanken_ryu/assets/120238831/12db335f-02b9-4023-984c-28a015a007a7">
+<img width="600" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/e3769eb2-c528-469a-ab39-42efbf63e144">
+<img width="600" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/6a74aec4-66ac-4f30-a23b-f6ac1714653a">
 
 ## 3. アプリの動作（Gif）
 ユーザーの手を認識してじゃんけんをします。
