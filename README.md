@@ -19,9 +19,7 @@
 ## 5. 今後の改善予定
 今後は手の認識の速度を向上させます。
 
-## 6. アプリの設計について
-
-## 7. MVVMの構成図
+## 6. MVVMの構成図
 ## View
 | ファイル名 | 概要・解説 |
 | ---- | ---- |
@@ -45,7 +43,7 @@
 | HandGestureModel | ゲーム終了を判定するメソッド、HPを計算するメソッドなどを記述したクラス |
 | HandGestureDetector | 動画フレームからVisionを用いてジェスチャーを判別するメソッドなどを記述したクラス |
 
-## 8. 工夫したコード／設計
+## 7. 工夫したコード／設計
 ### ポイント１　じゃんけんの手を判別
 開発初期段階では、じゃんけんの手を3000枚撮影して、CreateMLを用いてモデルを作成して、CoreMLを用いて手を判別しました。しかし３度モデルを作り直しても判別の制度が良くならなかったのでVisionのみで手の判別をすることにしました。  
 Visionでは、手の骨格の座標情報が取得できます。そこで、以下のような手順で手の判別を行うことで精度を向上させました。
@@ -62,7 +60,7 @@ https://github.com/ryuprogrammer/CheatingJanken/blob/7743c188fa222dc87bd5faeda04
 ・手順４：どの指が曲がっているかによってグーチョキパーを判別
 https://github.com/ryuprogrammer/CheatingJanken/blob/7743c188fa222dc87bd5faeda04d9fae7c5a0ed2/CheatingJanken/CheatingJanken/Model/HandGestureDetector.swift#L84-L106
 
-## 9 その他リンク
+## 8 その他リンク
 [アプリのホームページ](https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066https://f2v9l.hp.peraichi.com/cheatingjanken?_ga=2.91954137.299995805.1683264066-635457173.1683264066)  
 [制作者Twitter](https://twitter.com/engineerforios?s=11&t=E3_w-CiFaS5cBpi-By2fYg)
 
