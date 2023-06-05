@@ -9,7 +9,7 @@
 <img width="600" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/6a74aec4-66ac-4f30-a23b-f6ac1714653a">
 
 ## 3. アプリの動作（Gif）
-ユーザーの手を認識してじゃんけんをします。
+ユーザーの手を識別してじゃんけんをします。
 
 <img width="200" src="https://github.com/ryuprogrammer/CheatingJanken/assets/120238831/4c4c592d-2d57-44b9-9776-13338e645e3e">
 
