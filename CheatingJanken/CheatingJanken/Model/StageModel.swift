@@ -10,7 +10,7 @@ import AVFoundation
 
 struct StageModel {
     let stageSituations: [StageSituation] = [
-        StageSituation(imageName: "001", level: 1, winRate: 90, userReversalWin: nil, userReversalLose: nil),
+        StageSituation(imageName: "001", level: 1, winRate: 30, userReversalWin: nil, userReversalLose: nil),
         StageSituation(imageName: "002", level: 2, winRate: 60, userReversalWin: nil, userReversalLose: nil),
         StageSituation(imageName: "003", level: 3, winRate: 50, userReversalWin: 0.6, userReversalLose: nil),
         StageSituation(imageName: "004", level: 4, winRate: 40, userReversalWin: 0.5, userReversalLose: nil),
