@@ -105,15 +105,22 @@ struct HandGestureView: View {
                 finalResult = handGestureViewModel.judgeWinner()
 
                 // 画面遷移させないのでコメントアウト
-//                if let _ = finalResult {
-//                    isShowResultView = true
-//                }
+                //                if let _ = finalResult {
+                //                    isShowResultView = true
+                //                }
                 // １回のジャンケンを終了
                 isEndJanken = true
-                
+
                 // 数秒後にじゃんけん再開させる
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    
+                    if isEndJanken {
+                        // カメラを再開
+                        handGestureViewModel.start()
+                        // 次のジャンケンを開始
+                        isEndJanken = false
+                        // ジャンケンの掛け声を元に戻す
+                        jankenCount = 0
+                    }
                 }
             }
         })
