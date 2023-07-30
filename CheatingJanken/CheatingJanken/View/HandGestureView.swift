@@ -104,11 +104,17 @@ struct HandGestureView: View {
                 // ゲーム終了を判定
                 finalResult = handGestureViewModel.judgeWinner()
 
-                if let _ = finalResult {
-                    isShowResultView = true
-                }
+                // 画面遷移させないのでコメントアウト
+//                if let _ = finalResult {
+//                    isShowResultView = true
+//                }
                 // １回のジャンケンを終了
                 isEndJanken = true
+                
+                // 数秒後にじゃんけん再開させる
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    
+                }
             }
         })
         // currentGestureが適切に判定されているか確認
