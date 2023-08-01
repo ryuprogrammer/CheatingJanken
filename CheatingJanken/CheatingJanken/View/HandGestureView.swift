@@ -37,7 +37,7 @@ struct HandGestureView: View {
     
     // MARK: - 研究用のプロパティ
     // タスク２つ分の回数
-    @State private var gameCount: Int = 20
+    @State private var gameCount: Int = 2
     
     var body: some View {
         GeometryReader { geometry in
