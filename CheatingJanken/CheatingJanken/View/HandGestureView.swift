@@ -35,6 +35,10 @@ struct HandGestureView: View {
     private let userScreenWidth: Double = UIScreen.main.bounds.size.width
     private let userScreenHeight: Double = UIScreen.main.bounds.size.height
     
+    // MARK: - 研究用のプロパティ
+    // タスク２つ分の回数
+    @State private var gameCount: Int = 20
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -78,17 +82,17 @@ struct HandGestureView: View {
                     ResultView(finalResult: $finalResult, gameStage: $gameStage)
                 }
                 
-                // ボタン系
-                VStack {
-                    // 戻るボタン
-                    returnButton
-                    
-                    Spacer()
-                    
-                    // ゲーム再開ボタン
-                    jankenButtonView
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                //                // ボタン系
+                //                VStack {
+                //                    // 戻るボタン
+                //                    returnButton
+                //
+                //                    Spacer()
+                //
+                //                    // ゲーム再開ボタン
+                //                    jankenButtonView
+                //                }
+                //                .frame(width: geometry.size.width, height: geometry.size.height)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
@@ -97,6 +101,16 @@ struct HandGestureView: View {
             let jankenFinishTime: Int = 25
             
             if jankenCount >= jankenFinishTime {
+                if gameCount > 1 {
+                    // 回数を一回減らす
+                    gameCount -= 1
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        // 画面遷移back
+                        dissmiss()
+                    }
+                }
+                
                 // カメラを止める
                 handGestureViewModel.stop()
                 // ジャンケンの結果を出力
@@ -108,8 +122,8 @@ struct HandGestureView: View {
                 //                if let _ = finalResult {
                 //                    isShowResultView = true
                 //                }
-                //                // １回のジャンケンを終了
-                //                isEndJanken = true
+                // １回のジャンケンを終了
+                isEndJanken = true
                 
                 // 数秒後にじゃんけん再開させる
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -152,9 +166,9 @@ struct HandGestureView: View {
                 .frame(width: 180, height: 180)
         }
         
-        // 敵のHPを表示
-        HealthPointView(healthPoint: $handGestureViewModel.enemyHealthPoint,
-                        healthColor: $handGestureViewModel.enemyHealthColor)
+        //        // 敵のHPを表示
+        //        HealthPointView(healthPoint: $handGestureViewModel.enemyHealthPoint,
+        //                        healthColor: $handGestureViewModel.enemyHealthColor)
     }
     
     @ViewBuilder
@@ -196,9 +210,9 @@ struct HandGestureView: View {
             .rotation3DEffect(Angle(degrees: 180), axis: (x: 0, y: 1, z: 0))
             .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
         
-        // ユーザーのHPを表示
-        HealthPointView(healthPoint: $handGestureViewModel.userHealthPoint,
-                        healthColor: $handGestureViewModel.userHealthColor)
+        //        // ユーザーのHPを表示
+        //        HealthPointView(healthPoint: $handGestureViewModel.userHealthPoint,
+        //                        healthColor: $handGestureViewModel.userHealthColor)
     }
     
     @ViewBuilder
