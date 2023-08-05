@@ -9,10 +9,10 @@ import AVFoundation
 import UIKit
 
 struct SoundPlayer {
-    // 音源データ名をenumで管理
+    // 音源データ名をenumで管理 音が鳴らないように名前変更（一時的に）
     enum Sound: String {
-        case winSound = "winSound"
-        case loseSound = "loseSound"
+        case winSound = "winSoundNotSound"
+        case loseSound = "loseSoundNotSound"
         case buttonSound = "buttonSound"
         case jankenSound = "jankenSound"
     }

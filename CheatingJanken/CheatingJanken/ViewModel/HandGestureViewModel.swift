@@ -87,9 +87,9 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         }
 
         let random = Int.random(in: 1...100)
-        // プレーヤーが勝つ閾値
+        // プレーヤーが勝つ閾値→stageSituationのプロパティ使用してるから有効的！
         let userWinNumber = newWinRate ?? stageSituation.winRate
-        // プレーヤーが負ける閾値
+        // プレーヤーが負ける閾値（研究では使用しない←あいこはなしにするから）
         let userLoseNumber = 75 + userWinNumber/4
 
         // ユーザーの手が正しく認識されているか判定
@@ -101,10 +101,10 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         } else {
             if random <= userWinNumber { // プレーヤーの勝ち
                 result = .win
-                // 敵のHPを減らす
-                withAnimation {
-                    self.enemyHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: enemyHealthPoint)
-                }
+//                // 敵のHPを減らす
+//                withAnimation {
+//                    self.enemyHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: enemyHealthPoint)
+//                }
                 // 敵のHPの背景色を更新
                 self.enemyHealthColor = handGestureModel.determineHealthPointColor(healthPoint: enemyHealthPoint)
                 switch currentGesture {
@@ -113,36 +113,18 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 case .paper: enemyHandGesture = .rock
                 default: break
                 }
-            } else if random <= userLoseNumber { // プレーヤーの負け
+            } else { // プレーヤーの負け
                 result = .lose
-                // ユーザーのHPを減らす
-                withAnimation {
-                    self.userHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: userHealthPoint)
-                }
+//                // ユーザーのHPを減らす
+//                withAnimation {
+//                    self.userHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: userHealthPoint)
+//                }
                 // ユーザーのHPの背景色を更新
                 self.userHealthColor = handGestureModel.determineHealthPointColor(healthPoint: userHealthPoint)
                 switch currentGesture {
                 case .rock: enemyHandGesture = .paper
                 case .scissors: enemyHandGesture = .rock
                 case .paper: enemyHandGesture = .scissors
-                default: break
-                }
-            } else { // あいこ
-                result = .aiko
-                // ユーザーのHPを少し減らす
-                withAnimation {
-                    self.userHealthPoint = handGestureModel.hitPoint(damage: damage*0.1, healthPoint: userHealthPoint)
-                }
-                // 敵のHPを少し減らす
-                self.enemyHealthPoint = handGestureModel.hitPoint(damage: damage*0.1, healthPoint: enemyHealthPoint)
-                // ユーザーのHPの背景色を更新
-                self.userHealthColor = handGestureModel.determineHealthPointColor(healthPoint: userHealthPoint)
-                // 敵のHPの背景色を更新
-                self.enemyHealthColor = handGestureModel.determineHealthPointColor(healthPoint: enemyHealthPoint)
-                switch currentGesture {
-                case .rock: enemyHandGesture = .rock
-                case .scissors: enemyHandGesture = .scissors
-                case .paper: enemyHandGesture = .paper
                 default: break
                 }
             }

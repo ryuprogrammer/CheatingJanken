@@ -37,7 +37,7 @@ struct HandGestureView: View {
     
     // MARK: - 研究用のプロパティ
     // タスク２つ分の回数
-    @State private var gameCount: Int = 2
+    @State private var gameCount: Int = 10
     
     var body: some View {
         GeometryReader { geometry in
@@ -82,17 +82,17 @@ struct HandGestureView: View {
                     ResultView(finalResult: $finalResult, gameStage: $gameStage)
                 }
                 
-                //                // ボタン系
-                //                VStack {
-                //                    // 戻るボタン
-                //                    returnButton
-                //
-                //                    Spacer()
-                //
-                //                    // ゲーム再開ボタン
-                //                    jankenButtonView
-                //                }
-                //                .frame(width: geometry.size.width, height: geometry.size.height)
+                // ボタン系
+                VStack {
+                    // 戻るボタン
+                    returnButton
+                    
+                    Spacer()
+                    
+                    //                                    // ゲーム再開ボタン
+                    //                                    jankenButtonView
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
@@ -126,7 +126,7 @@ struct HandGestureView: View {
                 isEndJanken = true
                 
                 // 数秒後にじゃんけん再開させる
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     // カメラを再開
                     handGestureViewModel.start()
                     // 次のジャンケンを開始
