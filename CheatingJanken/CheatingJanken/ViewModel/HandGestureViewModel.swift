@@ -1,10 +1,3 @@
-//
-//  CameraModel.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/04/07.
-//
-
 import SwiftUI
 import AVFoundation
 import Vision
@@ -69,7 +62,6 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         jankenText = jankenTextModel.jankenText(jankenCount: jankenCount)
     }
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
-
     func calculateJankenResult(stageSituation: StageSituation) {
         // 逆転勝利の有無によってwinRateを増加
         if let userReversalWin = stageSituation.userReversalWin {
@@ -90,7 +82,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         // プレーヤーが勝つ閾値→stageSituationのプロパティ使用してるから有効的！
         let userWinNumber = newWinRate ?? stageSituation.winRate
         // プレーヤーが負ける閾値（研究では使用しない←あいこはなしにするから）
-        let userLoseNumber = 75 + userWinNumber/4
+        _ = 75 + userWinNumber/4
 
         // ユーザーの手が正しく認識されているか判定
         if currentGesture == .unknown {
@@ -101,10 +93,10 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         } else {
             if random <= userWinNumber { // プレーヤーの勝ち
                 result = .win
-//                // 敵のHPを減らす
-//                withAnimation {
-//                    self.enemyHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: enemyHealthPoint)
-//                }
+                //                // 敵のHPを減らす
+                //                withAnimation {
+                //                    self.enemyHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: enemyHealthPoint)
+                //                }
                 // 敵のHPの背景色を更新
                 self.enemyHealthColor = handGestureModel.determineHealthPointColor(healthPoint: enemyHealthPoint)
                 switch currentGesture {
@@ -115,10 +107,10 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 }
             } else { // プレーヤーの負け
                 result = .lose
-//                // ユーザーのHPを減らす
-//                withAnimation {
-//                    self.userHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: userHealthPoint)
-//                }
+                //                // ユーザーのHPを減らす
+                //                withAnimation {
+                //                    self.userHealthPoint = handGestureModel.hitPoint(damage: damage, healthPoint: userHealthPoint)
+                //                }
                 // ユーザーのHPの背景色を更新
                 self.userHealthColor = handGestureModel.determineHealthPointColor(healthPoint: userHealthPoint)
                 switch currentGesture {
@@ -129,7 +121,6 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 }
             }
         }
-
     }
 
     // ゲームが終了したら勝敗を判定

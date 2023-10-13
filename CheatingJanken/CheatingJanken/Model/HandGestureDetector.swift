@@ -1,10 +1,3 @@
-//
-//  HandGestureDetector.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/04/07.
-//
-
 import Foundation
 import Vision
 
@@ -102,7 +95,7 @@ class HandGestureDetector: ObservableObject {
             // IndexとMiddleが曲がっていないのでちょき
             currentGesture = .scissors
         } else {
-            currentGesture = .unknown
+            currentGesture = .scissors
         }
 
         // delegate経由でcurrentGestureを通知する

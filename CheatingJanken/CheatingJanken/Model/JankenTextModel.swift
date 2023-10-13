@@ -1,10 +1,3 @@
-//
-//  JankenTextModel.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/04/19.
-//
-
 import Foundation
 
 struct JankenTextModel {
@@ -15,7 +8,7 @@ struct JankenTextModel {
     mutating func jankenText(jankenCount: Int) -> String {
         var jankenText: String = ""
         let readyCount = 0...10
-        let firstCount = 11
+        let firstCount = 11...14
         let secondCount = 15...18
         let thirdCount = 19...22
         let finalCount = 23...25

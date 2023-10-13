@@ -1,10 +1,3 @@
-//
-//  StageModel.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/04/18.
-//
-
 import Foundation
 import AVFoundation
 
