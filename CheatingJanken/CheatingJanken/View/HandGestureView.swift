@@ -62,11 +62,8 @@ struct HandGestureView: View {
                     // じゃんけんの結果
                     resultView
 
-                    // ユーザーのView
-                    userContentsView
-
                     Spacer()
-                        .frame(height: 50)
+                        .frame(height: 180)
                 }
                 .ignoresSafeArea(.all)
                 .frame(width: geometry.size.width, height: geometry.size.height)
@@ -86,11 +83,11 @@ struct HandGestureView: View {
                     returnButton
 
                     Spacer()
-
-                    //                                    // ゲーム再開ボタン
-                    //                                    jankenButtonView
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
+
+                // ユーザーのView
+                userContentsView
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
@@ -99,13 +96,9 @@ struct HandGestureView: View {
             let jankenFinishTime: Int = 25
 
             if jankenCount >= jankenFinishTime {
-                if gameCount > 10 {
-                    gameCount -= 1
-                    /// ここで勝率を変化させたい
-                    /// ここ！
-                } else if gameCount > 1 {
-                    gameCount -= 1
-                } else {
+                // MARK: - 研究用
+                if handGestureViewModel.isEndgame {
+                    // ゲーム終了→画面遷移
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         // 画面遷移back
                         dissmiss()
@@ -114,21 +107,10 @@ struct HandGestureView: View {
 
                 // カメラを止める
                 handGestureViewModel.stop()
-                // スコアを更新
-                if handGestureViewModel.result == .win {
-                    userWinCount += 1
-                } else {
-                    enemyWinCount += 1
-                }
                 // ジャンケンの結果を出力
                 handGestureViewModel.calculateJankenResult(stageSituation: gameStage)
                 // ゲーム終了を判定
                 finalResult = handGestureViewModel.judgeWinner()
-
-                // 画面遷移させないのでコメントアウト
-                //                if let _ = finalResult {
-                //                    isShowResultView = true
-                //                }
                 // １回のジャンケンを終了
                 isEndJanken = true
 
@@ -161,30 +143,60 @@ struct HandGestureView: View {
             // キャラクターのジャンケン結果を表示
             Text(isEndJanken ? "\(handGestureViewModel.enemyHandGesture.rawValue)" : "✊")
                 .bold()
-                .font(.system(size: 70))
+                .font(.system(size: 120))
                 .foregroundColor(Color.white)
                 .rotationEffect(Angle(degrees: -30))
                 .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
 
             // キャラクターを配置
-            Image("\(gameStage.imageName)")
+            Image(systemName: "person.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 180, height: 180)
+                .foregroundColor(.white)
+                .frame(width: 100, height: 100)
+                .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
         }
-
-        //        // 敵のHPを表示
-        //        HealthPointView(healthPoint: $handGestureViewModel.enemyHealthPoint,
-        //                        healthColor: $handGestureViewModel.enemyHealthColor)
     }
 
     @ViewBuilder
     private var resultView: some View {
         VStack {
-            // スコアの表示
-            Text("\(userWinCount) vs \(enemyWinCount)")
-                .bold()
-                .font(.system(size: 80))
+            HStack {
+                VStack {
+                    Spacer()
+                        .frame(height: 40)
+                    Text("あなた")
+                        .bold()
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.white)
+                        .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
+                }
+                
+                Spacer()
+                    .frame(width: 80)
+//                // スコアの表示
+//                Text("\(handGestureViewModel.userWinCount) vs \(handGestureViewModel.enemyWinCount)")
+//                    .bold()
+//                    .font(.system(size: 80))
+//                    .foregroundColor(Color.white)
+//                    .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
+                VStack {
+                    Spacer()
+                        .frame(height: 40)
+                    Text("あいて")
+                        .bold()
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.white)
+                        .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
+                }
+            }
+
+            // MARK: - 研究用
+            // カウント表示
+            WinCountBarView(
+                userWinCount: $handGestureViewModel.userWinCount, enemyWinCount: $handGestureViewModel.enemyWinCount
+            )
+
             // ジャンケンのテキスト
             Text(isEndJanken ? handGestureViewModel.result.rawValue : handGestureViewModel.jankenText)
                 .bold()
@@ -218,14 +230,14 @@ struct HandGestureView: View {
         // ユーザーのHandPoseを表示
         Text("\(handGestureViewModel.handGestureDetector.currentGesture.rawValue)")
             .bold()
-            .font(.system(size: 130))
+            .font(.system(size: 200))
             .foregroundColor(Color.white)
             .rotation3DEffect(Angle(degrees: 180), axis: (x: 0, y: 1, z: 0))
             .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
-
-        //        // ユーザーのHPを表示
-        //        HealthPointView(healthPoint: $handGestureViewModel.userHealthPoint,
-        //                        healthColor: $handGestureViewModel.userHealthColor)
+            .position(
+                x: userScreenWidth*1.1-handGestureViewModel.handGestureDetector.wristPosition.y*(userScreenWidth)*1.3,
+                y: max(handGestureViewModel.handGestureDetector.wristPosition.x*userScreenHeight-100, 730)
+            )
     }
 
     @ViewBuilder

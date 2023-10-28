@@ -34,6 +34,26 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     // ダメージ
     private let damage: Double = 180
 
+    // MARK: - 研究用 ---------------------------------------------
+    // 10試行ごとに勝率を変化させるよう変数（1~5?）
+    @Published var winRateChangeCount: Int = 3
+    // 全試行の回数（タスクあたりのじゃんけんの回数）
+    @Published var taskCount: Int = 5
+    // 現在の試行回数
+    @Published var currentAttemptCount: Int = 1
+    // ユーザーの勝利回数
+    @Published var userWinCount: Int = 0
+    // 敵の勝利回数
+    @Published var enemyWinCount: Int = 0
+    // タスクの終了を判定
+    @Published var isEndgame: Bool = false
+    // 研究用ここまで -----------------------------------------------
+    
+    /// 課題：「逆転の感覚を強める」
+    /// take1
+    /// 1タスクあたりの回数を5回にする
+    /// ３回目から勝率変化させる
+
     override init() {
         handGestureDetector = HandGestureDetector()
         super.init()
@@ -63,21 +83,6 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     }
     // 勝率から敵のHandGestureとゲーム結果を算出するメソッド
     func calculateJankenResult(stageSituation: StageSituation) {
-        // 逆転勝利の有無によってwinRateを増加
-        if let userReversalWin = stageSituation.userReversalWin {
-            if userHealthPoint <= 1000*userReversalWin {
-                // 勝率が90%を超えないようにminを使用
-                newWinRate = min(stageSituation.winRate + 30, 90)
-            }
-        }
-        // 逆転負けの有無によってwinRateを減少
-        if let userReversalLose = stageSituation.userReversalLose {
-            if enemyHealthPoint <= 1000*userReversalLose {
-                // 勝率が10%を下回らないようにmaxを使用
-                newWinRate = max(stageSituation.winRate - 30, 10)
-            }
-        }
-
         let random = Int.random(in: 1...100)
         // プレーヤーが勝つ閾値→stageSituationのプロパティ使用してるから有効的！
         let userWinNumber = newWinRate ?? stageSituation.winRate
@@ -92,6 +97,9 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             enemyHandGesture = .unknown
         } else {
             if random <= userWinNumber { // プレーヤーの勝ち
+                withAnimation {
+                    userWinCount += 1
+                }
                 result = .win
                 //                // 敵のHPを減らす
                 //                withAnimation {
@@ -106,6 +114,9 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 default: break
                 }
             } else { // プレーヤーの負け
+                withAnimation {
+                    enemyWinCount += 1
+                }
                 result = .lose
                 //                // ユーザーのHPを減らす
                 //                withAnimation {
@@ -121,6 +132,27 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
                 }
             }
         }
+
+        // MARK: - 研究用
+        // 現在の勝率を確認
+        print("研究用：現在の勝率: \(userWinNumber)")
+        
+        // 現在の試行回数に応じて勝率を変化させる
+        if currentAttemptCount >= taskCount {
+            // タスク終了
+            isEndgame = true
+            print("研究用：タスクが終了しました。")
+        } else if currentAttemptCount >= winRateChangeCount {
+            // 勝率を変更（StageSituatioinの後半の勝率を適用）
+            if let newRate = stageSituation.userReversalWin {
+                newWinRate = Int(newRate)
+            }
+            print("研究用：後半の勝率を適用させました。")
+        }
+        
+        print("研究用：現在の試行回数 \(currentAttemptCount)")
+        // ここで試行の回数を１追加
+        currentAttemptCount += 1
     }
 
     // ゲームが終了したら勝敗を判定

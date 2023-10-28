@@ -21,7 +21,7 @@ struct StageView: View {
             BackgroundView(offset: $offset)
 
             VStack {
-                Text("ゲームメニュー")
+                Text("タスクを選択")
                     .padding()
                     .bold()
                     .font(.system(size: 40))

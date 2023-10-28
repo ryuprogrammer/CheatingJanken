@@ -9,6 +9,8 @@ protocol HandGestureDetectorDelegate: AnyObject {
 
 // 検出されたジェスチャーからHandGestureを判別するクラス
 class HandGestureDetector: ObservableObject {
+    // 手首の座標データ
+    @Published var wristPosition: CGPoint = .zero
     // ジャンケンの手の種類のenum
     enum HandGesture: String {
         case rock = "✊"
@@ -78,8 +80,7 @@ class HandGestureDetector: ObservableObject {
         if
             wristToIndexTip > wristToIndexPIP &&
                 wristToMiddleTip > wristToMiddlePIP &&
-                wristToRingTip > wristToRingPIP &&
-                wristToLittleTip > wristToLittlePIP {
+                wristToRingTip > wristToRingPIP {
             // ４本の指が曲がっていないのでぱー
             currentGesture = .paper
         } else if
@@ -100,6 +101,11 @@ class HandGestureDetector: ObservableObject {
 
         // delegate経由でcurrentGestureを通知する
         delegate?.handGestureDetector(self, didRecognize: currentGesture)
+
+        // MARK: - 研究用
+        wristPosition = wrist
+        print("テスト: wrist \(wrist)")
+        print("テスト: wristPosition \(wristPosition)")
     }
 
     // 画面上の２点間の距離を三平方の定理より求める
