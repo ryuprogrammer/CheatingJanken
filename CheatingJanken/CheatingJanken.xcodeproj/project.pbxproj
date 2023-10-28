@@ -17,6 +17,7 @@
 		5AB9233029E4FDF1006094D0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9232F29E4FDF1006094D0 /* CardView.swift */; };
 		5AB9233229E56700006094D0 /* HealthPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9233129E56700006094D0 /* HealthPointView.swift */; };
 		5AB9233429E5ABA5006094D0 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9233329E5ABA5006094D0 /* ResultView.swift */; };
+		5AD51D8A2AD93A7A00376F25 /* WinCountBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD51D892AD93A7A00376F25 /* WinCountBarView.swift */; };
 		5ADF084429DD4E8A0052765D /* HandGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084329DD4E8A0052765D /* HandGestureView.swift */; };
 		5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */; };
 		5ADF085029DFBD410052765D /* HandGestureDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADF084F29DFBD410052765D /* HandGestureDetector.swift */; };
@@ -44,6 +45,7 @@
 		5AB9232F29E4FDF1006094D0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5AB9233129E56700006094D0 /* HealthPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPointView.swift; sourceTree = "<group>"; };
 		5AB9233329E5ABA5006094D0 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		5AD51D892AD93A7A00376F25 /* WinCountBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCountBarView.swift; sourceTree = "<group>"; };
 		5ADF084329DD4E8A0052765D /* HandGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureView.swift; sourceTree = "<group>"; };
 		5ADF084D29DFBCED0052765D /* HandGestureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureViewModel.swift; sourceTree = "<group>"; };
 		5ADF084F29DFBD410052765D /* HandGestureDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureDetector.swift; sourceTree = "<group>"; };
@@ -112,12 +114,13 @@
 			children = (
 				5A1F0EBE29C6F7F0001E84B4 /* StageView.swift */,
 				5ADF084329DD4E8A0052765D /* HandGestureView.swift */,
+				5AD51D892AD93A7A00376F25 /* WinCountBarView.swift */,
 				5AB9233329E5ABA5006094D0 /* ResultView.swift */,
-				5AB9233129E56700006094D0 /* HealthPointView.swift */,
 				5AB9232D29E4FDAC006094D0 /* BackgroundView.swift */,
 				5AB9232F29E4FDF1006094D0 /* CardView.swift */,
 				5AB9232B29E4FD63006094D0 /* CircularProgressBarView.swift */,
 				5ADF085329DFBE3D0052765D /* CameraView.swift */,
+				5AB9233129E56700006094D0 /* HealthPointView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				5AB9233229E56700006094D0 /* HealthPointView.swift in Sources */,
 				5AB9232E29E4FDAC006094D0 /* BackgroundView.swift in Sources */,
 				5AB9233429E5ABA5006094D0 /* ResultView.swift in Sources */,
+				5AD51D8A2AD93A7A00376F25 /* WinCountBarView.swift in Sources */,
 				5AB9232C29E4FD63006094D0 /* CircularProgressBarView.swift in Sources */,
 				5ADF084E29DFBCED0052765D /* HandGestureViewModel.swift in Sources */,
 				5AFCD02C29EF6B7A00BA7A86 /* JankenTextModel.swift in Sources */,

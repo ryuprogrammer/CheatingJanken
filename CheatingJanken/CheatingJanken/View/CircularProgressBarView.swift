@@ -30,7 +30,7 @@ struct CircularProgressBarView: View {
                 .rotationEffect(Angle(degrees: 270))
 
             VStack {
-                Text("難易度")
+                Text("タスク")
                     .font(.system(size: 20))
                 // 進捗率のテキスト
                 AnimationReader(percentage) {value in

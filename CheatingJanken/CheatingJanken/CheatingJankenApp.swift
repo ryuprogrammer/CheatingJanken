@@ -1,10 +1,3 @@
-//
-//  CheatingJankenApp.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/03/19.
-//
-
 import SwiftUI
 
 @main

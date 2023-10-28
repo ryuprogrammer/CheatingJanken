@@ -1,23 +1,37 @@
-//
-//  StageModel.swift
-//  CheatingJanken
-//
-//  Created by トム・クルーズ on 2023/04/18.
-//
-
 import Foundation
 import AVFoundation
 
 struct StageModel {
     let stageSituations: [StageSituation] = [
-        StageSituation(imageName: "001", level: 1, winRate: 90, userReversalWin: nil, userReversalLose: nil),
-        StageSituation(imageName: "002", level: 2, winRate: 60, userReversalWin: nil, userReversalLose: nil),
-        StageSituation(imageName: "003", level: 3, winRate: 50, userReversalWin: 0.6, userReversalLose: nil),
-        StageSituation(imageName: "004", level: 4, winRate: 40, userReversalWin: 0.5, userReversalLose: nil),
-        StageSituation(imageName: "005", level: 5, winRate: 30, userReversalWin: 0.4, userReversalLose: nil),
-        StageSituation(imageName: "006", level: 6, winRate: 50, userReversalWin: nil, userReversalLose: 0.6),
-        StageSituation(imageName: "007", level: 7, winRate: 30, userReversalWin: nil, userReversalLose: 0.5)
+        // タスク１: 統制タスク（勝率の変化なし。常に勝率50%）
+        StageSituation(
+            imageName: "001",
+            level: 0001,
+            winRate: 50,
+            userReversalWin: 50,
+            userReversalLose: nil
+        ),
+        // タスク２: 圧勝タスク（勝率80%）
+        StageSituation(
+            imageName: "001",
+            level: 0002,
+            winRate: 80,
+            userReversalWin: 80,
+            userReversalLose: nil
+        ),
+        // タスク３: 逆転勝利タスク（勝率5%→95%）
+        StageSituation(
+            imageName: "001",
+            level: 0003
+            , winRate: 5
+            , userReversalWin: 95
+            , userReversalLose: nil
+        )
     ]
     // soundPlayerのインスタンス生成
     var soundPlayer = SoundPlayer()
 }
+
+// MARK: - 研究用
+/// userReversalWin の値をタスク後半（11~20回）の勝率として使用します。
+/// あとでコード全体の変数名を変更したい
