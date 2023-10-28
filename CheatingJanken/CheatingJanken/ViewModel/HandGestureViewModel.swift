@@ -35,8 +35,8 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     private let damage: Double = 180
 
     // MARK: - 研究用 ---------------------------------------------
-    // 10試行ごとに勝率を変化させるよう変数（1~5?）
-    @Published var winRateChangeCount: Int = 3
+    // 3試行ごとに勝率を変化させるよう変数（1~5?）
+    @Published var winRateChangeCount: Int = 2
     // 全試行の回数（タスクあたりのじゃんけんの回数）
     @Published var taskCount: Int = 5
     // 現在の試行回数
@@ -48,7 +48,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
     // タスクの終了を判定
     @Published var isEndgame: Bool = false
     // 研究用ここまで -----------------------------------------------
-    
+
     /// 課題：「逆転の感覚を強める」
     /// take1
     /// 1タスクあたりの回数を5回にする
@@ -136,7 +136,7 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
         // MARK: - 研究用
         // 現在の勝率を確認
         print("研究用：現在の勝率: \(userWinNumber)")
-        
+
         // 現在の試行回数に応じて勝率を変化させる
         if currentAttemptCount >= taskCount {
             // タスク終了
@@ -149,10 +149,12 @@ class HandGestureViewModel: NSObject, ObservableObject, AVCaptureVideoDataOutput
             }
             print("研究用：後半の勝率を適用させました。")
         }
-        
+
         print("研究用：現在の試行回数 \(currentAttemptCount)")
         // ここで試行の回数を１追加
         currentAttemptCount += 1
+        
+        print("-------------------------")
     }
 
     // ゲームが終了したら勝敗を判定

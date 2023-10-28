@@ -171,15 +171,15 @@ struct HandGestureView: View {
                         .foregroundColor(Color.white)
                         .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
                 }
-                
+
                 Spacer()
                     .frame(width: 80)
-//                // スコアの表示
-//                Text("\(handGestureViewModel.userWinCount) vs \(handGestureViewModel.enemyWinCount)")
-//                    .bold()
-//                    .font(.system(size: 80))
-//                    .foregroundColor(Color.white)
-//                    .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
+                //                // スコアの表示
+                //                Text("\(handGestureViewModel.userWinCount) vs \(handGestureViewModel.enemyWinCount)")
+                //                    .bold()
+                //                    .font(.system(size: 80))
+                //                    .foregroundColor(Color.white)
+                //                    .shadow(color: .black.opacity(0.4), radius: 5, x: 5, y: 5)
                 VStack {
                     Spacer()
                         .frame(height: 40)
